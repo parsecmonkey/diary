@@ -45,6 +45,7 @@ public class Json {
     }
 
     public static Path getApplicationPath(Class<?> cls) throws URISyntaxException {
+        // jarの実行ファイル場所取得
         ProtectionDomain pd = cls.getProtectionDomain();
         CodeSource cs = pd.getCodeSource();
         URL location = cs.getLocation();
