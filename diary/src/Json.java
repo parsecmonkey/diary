@@ -25,19 +25,19 @@ public class Json {
 
     public void exportJSON() {
 
+        String exe_path = System.getProperty("user.dir");
+        String data_path = "/diary/data/";
+        // final String SETTING_FILE_NAME = "setting.json";
+        final String SETTING_FILE_NAME = "test.json";
+
         // Path path;
         try {
-            // 実行ファイルパスの取得
-            Path path = getApplicationPath(Main.class);
-            System.out.println("path=" + path + "\\diary\\data\\output.json");
-
             // ファイルへの書き出し
-            JsonWriter writer = new JsonWriter(
-                    new BufferedWriter(new FileWriter(path.toString() + "\\diary\\data\\output.json")));
-            this.gson.toJson(new JsonPrimitive("hello"), writer);
-        } catch (URISyntaxException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            final String setting_file_path = exe_path + data_path + SETTING_FILE_NAME;
+            System.out.println(setting_file_path);
+            JsonWriter writer = new JsonWriter(new BufferedWriter(new FileWriter(setting_file_path)));
+
+            this.gson.toJson(new JsonPrimitive("hello"), writer); // *
         } catch (IOException ex) {
             ex.printStackTrace();
         }
