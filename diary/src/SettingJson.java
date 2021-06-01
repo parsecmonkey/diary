@@ -62,7 +62,8 @@ public class SettingJson extends Json {
     }
 
     // Json読み込み
-    public void importJSON(Setting setting) {
+    public Setting importJSON() {
+        Setting setting = new Setting();
         try {
             JsonElement jsontree = JsonParser.parseReader(new FileReader(this.setting_file_path));
             JsonObject je = jsontree.getAsJsonObject();
@@ -80,6 +81,7 @@ public class SettingJson extends Json {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        return setting;
     }
 
     // setter and getter

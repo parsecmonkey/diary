@@ -1,0 +1,59 @@
+@startuml
+' クラス定義
+class Main {
+    + void main()
+}
+
+class JFrame{
+
+}
+
+class Window {
+}
+
+class Json {
+    # Gson gson
+    # String exe_path
+    # String data_path
+    # Path getApplicationPath()
+    + String toJson()
+}
+
+class Setting {
+    - String window_title
+    - int window_width
+    - int window_height
+    + String getWindow_title()
+    + int getWindow_width()
+    + int getWindow_height()
+    + Sring setWindow_title()
+    + int setWindow_width()
+    + int setWindow_height()
+}
+
+class SettingJson {    
+    - String setting_file_name
+    # String setting_file_path
+    + void set_file_path()
+    + void exportJSON()
+    - void write_setting()
+    + void importJSON()
+    + void setSetting_file_name()
+}
+
+class Debugger{
+    # Boolean debug
+    + Debugger()
+    + void setDebug()
+}
+
+' 関係
+' Json <|-- SettingJson : 継承
+Json <|-- SettingJson
+JFrame <|-- Window
+Window "1" *-- "1" Main
+Setting "1" *-- "1" SettingJson
+Setting "1" *-- "1" Main
+Debugger "1" o-- "1" Main
+Debugger "1" o-- "1" SettingJson
+@enduml
