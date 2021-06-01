@@ -18,7 +18,7 @@ class Main {
         json.setSetting_file_name(setting_file_name); // 設定ファイルの名前設定
         json.set_file_path();// 実行ファイルパス設定
 
-        json.importJSON(setting); // 設定を入力
+        setting = json.importJSON(); // 設定を読み込む
         // json.exportJSON(setting); // 設定を出力する
 
         // ウィンドウ設定
