@@ -1,33 +1,34 @@
+// メイン実行ファイル
+
 package diary.src;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
-import diary.src.Json;
-import diary.src.Setting;
 
 class Main {
     public static void main(String args[]) {
-        System.out.println("Start program.");
+        new Debugger("Start program.", "inf");
 
         // 設定の設定
         Setting setting = new Setting(); // 設定
-        Json json = new Json(); // Json操作
-        json.exportJSON();
+        SettingJson json = new SettingJson(); // Json操作
 
-        String settingString = json.toJson(setting); // 設定をJSONにする
-        System.out.println(settingString);
+        final String exe_path = System.getProperty("user.dir");
+        final String data_path = "/diary/data/"; // データディレクトリパス
+        final String setting_file_name = "setting.json"; // ファイルの名前設定
+        json.setExe_path(exe_path); // 実行ファイルパス設定
+        json.setData_path(data_path); // データディレクトリパス設定
+        json.setSetting_file_name(setting_file_name); // 設定ファイルの名前設定
+        json.set_file_path();// 実行ファイルパス設定
+
+        json.importJSON(setting); // 設定を入力
+        // json.exportJSON(setting); // 設定を出力する
 
         // ウィンドウ設定
         String window_title = setting.getWindow_title(); // タイトル
         int window_width = setting.getWindow_width(); // 高さ
         int window_height = setting.getWindow_height(); // 幅
 
-        // Window window = new Window(window_title, window_width, window_height); //
         // ウィンドウを開く
+        Window window = new Window(window_title, window_width, window_height);
 
     }
-
 
 }

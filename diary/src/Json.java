@@ -17,34 +17,15 @@ import java.security.ProtectionDomain;
 import diary.src.Json;
 
 public class Json {
-    private Gson gson;
+    protected Gson gson;
+    protected String exe_path;// 実行ファイルパス
+    protected String data_path; // データディレクトリのパス
 
     public Json() {
         this.gson = new Gson(); // Gsonのインスタンス
     }
 
-    public void exportJSON() {
-
-        String exe_path = System.getProperty("user.dir");
-        String data_path = "/diary/data/";
-        // final String SETTING_FILE_NAME = "setting.json";
-        final String SETTING_FILE_NAME = "test.json";
-
-        // Path path;
-        try {
-            // ファイルへの書き出し
-            final String setting_file_path = exe_path + data_path + SETTING_FILE_NAME;
-            System.out.println(setting_file_path);
-            JsonWriter writer = new JsonWriter(new BufferedWriter(new FileWriter(setting_file_path)));
-
-            this.gson.toJson(new JsonPrimitive("hello"), writer); // *
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
-    public static Path getApplicationPath(Class<?> cls) throws URISyntaxException {
+    protected static Path getApplicationPath(Class<?> cls) throws URISyntaxException {
         // jarの実行ファイル場所取得
         ProtectionDomain pd = cls.getProtectionDomain();
         CodeSource cs = pd.getCodeSource();
@@ -59,10 +40,25 @@ public class Json {
         return this.gson.toJson(setting);
     }
 
-    private static void debug_print(String text, boolean debug) {
-        if (debug) {
-            System.out.println(text);
-        }
+
+    public void set_file_path() {
+    }
+
+    public void exportJSON(Object object) {
+    }
+
+    public void importJSON(Object object) {
+    }
+
+    // getter and setter
+    public void setExe_path(String exe_path) {
+        // 実行ファイルのパス
+        this.exe_path = exe_path;
+    }
+
+    public void setData_path(String data_path) {
+        // dataディレクトリのパス
+        this.data_path = data_path;
     }
 
 }
