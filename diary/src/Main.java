@@ -21,14 +21,8 @@ class Main {
         setting = json.importJSON(); // 設定を読み込む
         // json.exportJSON(setting); // 設定を出力する
 
-        // ウィンドウ設定
-        String window_title = setting.getWindow_title(); // タイトル
-        int window_width = setting.getWindow_width(); // 高さ
-        int window_height = setting.getWindow_height(); // 幅
-
-        // ウィンドウを開く
-        Window window = new Window(window_title, window_width, window_height);
-        window.setTextWindow(window); // ウィンドウにテキストを表示
+        // ウィンドウを操作する
+        new OperateWindow(setting);
     }
 
 }
