@@ -11,6 +11,9 @@ class JFrame{
 class Window {
 }
 
+class OperateWindow {
+}
+
 class Json {
     # Gson gson
     # String exe_path
@@ -51,7 +54,8 @@ class Debugger{
 ' Json <|-- SettingJson : 継承
 Json <|-- SettingJson
 JFrame <|-- Window
-Window "1" *-- "1" Main
+Window "1" *-- "1" OperateWindow
+OperateWindow "1" *-- "1" Main
 Setting "1" *-- "1" SettingJson
 Setting "1" *-- "1" Main
 Debugger "1" o-- "1" Main
