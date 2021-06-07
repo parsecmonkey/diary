@@ -30,8 +30,8 @@ public class Window extends JFrame {
     }
 
     // 背景色を設定 ×
-    public void setBackground() {
-        getContentPane().setBackground( Color.RED );
+    public void setBackground(Color color) {
+        getContentPane().setBackground(color);
     }
 
     // ウィンドウのテキスト設定
