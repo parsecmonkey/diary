@@ -16,7 +16,11 @@ public class Window extends JFrame implements ActionListener {
         setSize(width, height);// ウィンドウサイズ
         setLocationRelativeTo(null);// 画面中央に配置
         setResizable(false);// リサイズ禁止
-        setVisible(true);// ウィンドウ表示
+    }
+
+    // ウィンドウを表示
+    public void setVisible(Window window) {
+        window.setVisible(true);// ウィンドウ表示
     }
 
     // ウィンドウのテキスト設定
@@ -59,5 +63,11 @@ public class Window extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JLabel label = new JLabel("Push Button");
         JOptionPane.showMessageDialog(this, label);
+    }
+
+    // アイコンを設定（上手くいってない）
+    public void setImageIcon(Window window, String image) {
+        ImageIcon icon = new ImageIcon(image);
+        window.setIconImage(icon.getImage());
     }
 }
