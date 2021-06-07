@@ -7,11 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Window extends JFrame implements ActionListener {
+public class Window extends JFrame {
 
     // ウィンドウの設定
     public Window(String title, int width, int height) {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);// 閉じるボタンの処理
+        setDefaultCloseOperation(EXIT_ON_CLOSE); // 閉じるボタンの処理
         setTitle(title); // タイトルの設定
         setSize(width, height);// ウィンドウサイズ
         setLocationRelativeTo(null);// 画面中央に配置
@@ -47,7 +47,7 @@ public class Window extends JFrame implements ActionListener {
         JButton btn4 = new JButton("East");
 
         // ボタンクリック
-        btn2.addActionListener(this);
+        btn2.addActionListener(new Action1());
 
         // パネルに追加
         panel.add(btn2);
@@ -60,9 +60,19 @@ public class Window extends JFrame implements ActionListener {
     }
 
     // ボタンクリック時のアクション
-    public void actionPerformed(ActionEvent e) {
-        JLabel label = new JLabel("Push Button");
-        JOptionPane.showMessageDialog(this, label);
+    static class Action1 implements ActionListener {
+        // 新しい画面の作成
+        public void actionPerformed(ActionEvent e) {
+            Window window2 = new Window("a", 400, 400);
+            window2.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+            JLabel label = new JLabel("you clicked me");
+            JPanel panel = new JPanel();
+            window2.add(panel);
+            panel.add(label);
+
+            window2.setVisible();
+        }
     }
 
     // アイコンを設定 ×
