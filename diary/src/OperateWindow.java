@@ -10,10 +10,10 @@ public class OperateWindow {
 
         window.setImageIcon("../img/kis_logo2.png"); // アイコンを設定 ×
         window.setBackground(); // 背景設定 ×
-        window.setTextWindow(window); // ウィンドウにテキストを表示
-        window.setButtonWindow(window); // ウィンドウにボタンを表示
+        window.setTextWindow(); // ウィンドウにテキストを表示
+        window.setButtonWindow(); // ウィンドウにボタンを表示
         
-        window.setVisible(window); // 最後にウィンドウを表示
+        window.setVisible(); // 最後にウィンドウを表示
     }
 
 }

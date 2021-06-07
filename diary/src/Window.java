@@ -19,12 +19,12 @@ public class Window extends JFrame implements ActionListener {
     }
 
     // ウィンドウを表示
-    public void setVisible(Window window) {
-        window.setVisible(true);// ウィンドウ表示
+    public void setVisible() {
+        setVisible(true);// ウィンドウ表示
     }
 
     // ウィンドウのテキスト設定
-    public void setTextWindow(Window window) {
+    public void setTextWindow() {
         JPanel panel = new JPanel(); //パネルのインスタンスの生成
         JLabel label = new JLabel("LGTM!"); //ラベルのインスタンスの生成      
 
@@ -33,11 +33,11 @@ public class Window extends JFrame implements ActionListener {
         label.setForeground(Color.BLUE);
         
         panel.add(label); //ラベルをパネルに配置
-        window.add(panel, BorderLayout.CENTER); //パネルをウインドウの表示領域に配置
+        add(panel, BorderLayout.CENTER); //パネルをウインドウの表示領域に配置
     }
 
     // ウィンドウのボタン設定
-    public void setButtonWindow(Window window) {
+    public void setButtonWindow() {
         JPanel panel = new JPanel();
 
         // ボタンを追加
@@ -53,10 +53,10 @@ public class Window extends JFrame implements ActionListener {
         panel.add(btn2);
 
         // ボタンを表示
-        window.getContentPane().add(btn1, BorderLayout.NORTH);
-        window.getContentPane().add(panel, BorderLayout.SOUTH);
-        window.getContentPane().add(btn3, BorderLayout.WEST);
-        window.getContentPane().add(btn4, BorderLayout.EAST);
+        getContentPane().add(btn1, BorderLayout.NORTH);
+        getContentPane().add(panel, BorderLayout.SOUTH);
+        getContentPane().add(btn3, BorderLayout.WEST);
+        getContentPane().add(btn4, BorderLayout.EAST);
     }
 
     // ボタンクリック時のアクション
