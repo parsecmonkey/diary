@@ -8,7 +8,7 @@ public class OperateWindow {
         int window_height = setting.getWindow_height(); // 幅
         Window window = new Window(window_title, window_width, window_height);
 
-        window.setImageIcon("../img/kis_logo2.png"); // アイコンを設定 ×
+        window.setImageIcon("./diary/img/kis_logo2.png"); // アイコンを設定
         window.setBackground(); // 背景設定 ×
         window.setTextWindow(); // ウィンドウにテキストを表示
         window.setButtonWindow(); // ウィンドウにボタンを表示
