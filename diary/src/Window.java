@@ -23,6 +23,17 @@ public class Window extends JFrame {
         setVisible(true);// ウィンドウ表示
     }
 
+    // アイコンを設定 ×
+    public void setImageIcon(String image) {
+        ImageIcon icon = new ImageIcon(image);
+        setIconImage(icon.getImage());
+    }
+
+    // 背景色を設定 ×
+    public void setBackground() {
+        getContentPane().setBackground( Color.RED );
+    }
+
     // ウィンドウのテキスト設定
     public void setTextWindow() {
         JPanel panel = new JPanel(); //パネルのインスタンスの生成
@@ -73,16 +84,5 @@ public class Window extends JFrame {
 
             window2.setVisible();
         }
-    }
-
-    // アイコンを設定 ×
-    public void setImageIcon(String image) {
-        ImageIcon icon = new ImageIcon(image);
-        setIconImage(icon.getImage());
-    }
-
-    // 背景色を設定 ×
-    public void setBackground() {
-        getContentPane().setBackground( Color.RED );
     }
 }
