@@ -23,7 +23,7 @@ public class Window extends JFrame {
         setVisible(true);// ウィンドウ表示
     }
 
-    // アイコンを設定 ×
+    // アイコンを設定
     public void setImageIcon(String image) {
         ImageIcon icon = new ImageIcon(image);
         setIconImage(icon.getImage());
