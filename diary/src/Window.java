@@ -65,9 +65,14 @@ public class Window extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(this, label);
     }
 
-    // アイコンを設定（上手くいってない）
-    public void setImageIcon(Window window, String image) {
+    // アイコンを設定 ×
+    public void setImageIcon(String image) {
         ImageIcon icon = new ImageIcon(image);
-        window.setIconImage(icon.getImage());
+        setIconImage(icon.getImage());
+    }
+
+    // 背景色を設定 ×
+    public void setBackground() {
+        getContentPane().setBackground( Color.RED );
     }
 }
