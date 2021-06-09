@@ -4,7 +4,7 @@ package diary.src;
 
 class Main {
     public static void main(String args[]) {
-        new Debugger("Start program.", "inf");
+        Debugger.out("Start program.", "inf");
 
         // 設定の設定
         Setting setting = new Setting(); // 設定

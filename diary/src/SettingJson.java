@@ -14,7 +14,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonWriter;
 import com.google.gson.JsonArray;
 
-public class SettingJson extends Json {
+public final class SettingJson extends Json {
 
     private String setting_file_name; // setting.jsonの名前
     protected String setting_file_path; // 最終的なファイルパス
@@ -31,7 +31,7 @@ public class SettingJson extends Json {
     // ファイルへの書き出し
     public void exportJSON(Setting setting) {
 
-        new Debugger(setting_file_path, "inf");
+        Debugger.out(setting_file_path, "inf");
 
         try {
             write_setting(new File(setting_file_path), setting);
@@ -41,7 +41,7 @@ public class SettingJson extends Json {
 
     }
 
-    private static void write_setting(File file, Setting setting) throws IOException {
+    private void write_setting(File file, Setting setting) throws IOException {
         // 設定ファイル書き込み
         try (JsonWriter writer = new JsonWriter(new FileWriter(file))) {
             writer.setIndent("    "); // インデント
