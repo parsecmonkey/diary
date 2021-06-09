@@ -41,8 +41,9 @@ public final class SettingJson extends Json {
 
     }
 
+    // 設定ファイル書き込み
     private void write_setting(File file, Setting setting) throws IOException {
-        // 設定ファイル書き込み
+
         try (JsonWriter writer = new JsonWriter(new FileWriter(file))) {
             writer.setIndent("    "); // インデント
 
@@ -61,7 +62,7 @@ public final class SettingJson extends Json {
         }
     }
 
-    // Json読み込み
+    // Json読み込み Settingクラスへ設定を入れ込む
     public void importJSON() {
         try {
             JsonElement jsontree = JsonParser.parseReader(new FileReader(this.setting_file_path));
