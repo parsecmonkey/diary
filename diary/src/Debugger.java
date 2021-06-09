@@ -1,41 +1,21 @@
 
 package diary.src;
 
-public class Debugger {
+public final class Debugger {
     // デバッグ
     //
     // ・ラベルの種類
     // inf: INF
 
-    // protected boolean debug = false;
-    protected boolean debug = true;
-
-    public Debugger() {
-
+    // 標準出力
+    public static void out(String text) {
+        System.out.println("INF: " + text);
     }
 
-    // ラベル指定なし → INFとして出力
-    public Debugger(String text) {
-        if (this.debug) {
+    public static void out(String text, String label) {
+        if (label.equals("inf") || label.equals("INF"))
             System.out.println("INF: " + text);
-        }
-    }
-
-    public Debugger(String text, String label) {
-        if (this.debug) {
-            if (label.equals("inf"))
-                System.out.println("INF: " + text);
-        }
-    }
-
-    public Debugger(String text, String label, boolean debug) {
-        if (this.debug || debug) {
-            if (label.equals("inf"))
-                System.out.println("INF: " + text);
-        }
-    }
-
-    public void setDebug(boolean debug) {
-        this.debug = debug;
+        else
+            System.out.println(label + ": " + text);
     }
 }

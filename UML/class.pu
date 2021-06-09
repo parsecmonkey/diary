@@ -45,9 +45,7 @@ class SettingJson {
 }
 
 class Debugger{
-    # Boolean debug
-    + Debugger()
-    + void setDebug()
+    {static}+ void setDebug()
 }
 
 ' 関係
