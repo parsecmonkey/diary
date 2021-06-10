@@ -23,15 +23,9 @@ class Json {
 }
 
 class Setting {
-    - String window_title
-    - int window_width
-    - int window_height
-    + String getWindow_title()
-    + int getWindow_width()
-    + int getWindow_height()
-    + Sring setWindow_title()
-    + int setWindow_width()
-    + int setWindow_height()
+    {static}+ String window_title
+    {static}+ int window_width
+    {static}+ int window_height
 }
 
 class SettingJson {    
