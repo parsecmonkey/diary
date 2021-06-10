@@ -15,11 +15,6 @@ public class EditWindow extends Window {
         setResizable(false);// リサイズ禁止
     }
 
-    // ウィンドウを表示
-    public void setVisible() {
-        setVisible(true);// ウィンドウ表示
-    }
-
     // ウィンドウのテキスト設定
     @Override
     public void setTextWindow() {
