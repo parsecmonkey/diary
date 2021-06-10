@@ -9,6 +9,9 @@ import java.awt.event.*;
 
 public class Window extends JFrame {
 
+    public Window() {
+    }
+
     // ウィンドウの設定
     public Window(String title, int width, int height) {
         setDefaultCloseOperation(EXIT_ON_CLOSE); // 閉じるボタンの処理
@@ -74,15 +77,8 @@ public class Window extends JFrame {
     static class Action1 implements ActionListener {
         // 新しい画面の作成
         public void actionPerformed(ActionEvent e) {
-            Window window2 = new Window("a", 400, 400);
-            window2.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-            JLabel label = new JLabel("you clicked me");
-            JPanel panel = new JPanel();
-            window2.add(panel);
-            panel.add(label);
-
-            window2.setVisible();
+            OperateWindow operateWindow = new OperateWindow();
+            operateWindow.CreateEditWindow();
         }
     }
 }

@@ -21,7 +21,8 @@ class Main {
         // json.exportJSON(setting); // 設定を出力する
 
         // ウィンドウを操作する
-        new OperateWindow();
+        OperateWindow operateWindow = new OperateWindow();
+        operateWindow.CreateWindow();
     }
 
 }
