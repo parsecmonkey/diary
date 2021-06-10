@@ -5,10 +5,12 @@ class Main {
 }
 
 class JFrame{
-
 }
 
 class Window {
+}
+
+class EditWindow {
 }
 
 class OperateWindow {
@@ -47,6 +49,8 @@ class Debugger{
 Json <|-- SettingJson
 JFrame <|-- Window
 Window "1" *-- "1" OperateWindow
+Window <|-- EditWindow
+EditWindow "1" *-- "1" OperateWindow
 OperateWindow "1" *-- "1" Main
 Setting "1" *-- "1" SettingJson
 Setting "1" *-- "1" Main
