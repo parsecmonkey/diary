@@ -41,8 +41,9 @@ public final class SettingJson extends Json {
 
     }
 
+    // 設定ファイル書き込み
     private void write_setting(File file, Setting setting) throws IOException {
-        // 設定ファイル書き込み
+
         try (JsonWriter writer = new JsonWriter(new FileWriter(file))) {
             writer.setIndent("    "); // インデント
 
@@ -51,9 +52,9 @@ public final class SettingJson extends Json {
             writer.beginArray();
 
             writer.beginObject();
-            writer.name("title").value(setting.getWindow_title());
-            writer.name("width").value(setting.getWindow_width());
-            writer.name("height").value(setting.getWindow_height());
+            writer.name("title").value(Setting.window_title);
+            writer.name("width").value(Setting.window_width);
+            writer.name("height").value(Setting.window_height);
             writer.endObject();
 
             writer.endArray();
@@ -61,18 +62,17 @@ public final class SettingJson extends Json {
         }
     }
 
-    // Json読み込み
-    public Setting importJSON() {
-        Setting setting = new Setting();
+    // Json読み込み Settingクラスへ設定を入れ込む
+    public void importJSON() {
         try {
             JsonElement jsontree = JsonParser.parseReader(new FileReader(this.setting_file_path));
             JsonObject je = jsontree.getAsJsonObject();
             JsonArray ja = je.getAsJsonArray("window");
             for (Object o : ja) {
                 JsonObject parameter = (JsonObject) o;
-                setting.setWindow_title(parameter.get("title").getAsString());
-                setting.setWindow_width(parameter.get("width").getAsInt());
-                setting.setWindow_height(parameter.get("height").getAsInt());
+                Setting.window_title = parameter.get("title").getAsString();
+                Setting.window_width = parameter.get("width").getAsInt();
+                Setting.window_height = parameter.get("height").getAsInt();
             }
         } catch (JsonIOException e) {
             e.printStackTrace();
@@ -81,7 +81,6 @@ public final class SettingJson extends Json {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return setting;
     }
 
     // setter and getter
