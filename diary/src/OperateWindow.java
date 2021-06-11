@@ -4,7 +4,9 @@ package diary.src;
 import java.awt.*;
 
 public class OperateWindow {
-    public OperateWindow() {
+
+    // メイン画面
+    public void CreateWindow() {
         // ウィンドウ設定
         String window_title = Setting.window_title; // タイトル
         int window_width = Setting.window_width; // 高さ
@@ -16,6 +18,18 @@ public class OperateWindow {
         window.setTextWindow(); // ウィンドウにテキストを表示
         window.setButtonWindow(); // ウィンドウにボタンを表示
 
+        window.setVisible(); // 最後にウィンドウを表示
+    }
+
+    // 編集画面
+    public void CreateEditWindow() {
+        // ウィンドウ設定
+        String window_title = Setting.window_title; // タイトル
+        int window_width = 400; // 高さ
+        int window_height = 400; // 幅
+        EditWindow window = new EditWindow(window_title, window_width, window_height);
+
+        window.setTextWindow(); // ウィンドウにテキストを表示
         window.setVisible(); // 最後にウィンドウを表示
     }
 
