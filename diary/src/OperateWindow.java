@@ -30,6 +30,8 @@ public class OperateWindow {
         EditWindow window = new EditWindow(window_title, window_width, window_height);
 
         window.setTextWindow(); // ウィンドウにテキストを表示
+        window.setTextArea("kis", 15); // ウィンドウにテキストエリアを設置
+
         window.setVisible(); // 最後にウィンドウを表示
     }
 
