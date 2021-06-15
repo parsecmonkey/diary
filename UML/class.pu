@@ -44,6 +44,33 @@ class Debugger{
     {static}+ void setDebug()
 }
 
+' DB関連
+
+class SQLite{
+    - Connection conn
+    - Statement stm
+    - String dbPath
+    - String table_name
+    
+    + void create_table() 
+    + void insert(String date, String title, String main_text, int flag)
+    + DiaryData select(int id)
+    + DiaryData select(String date)
+    + void drop_table()
+    + void dbClose()
+}
+
+class DiaryData{
+    + int id
+    + String date
+    + String title
+    + String main_text
+    + int flag
+
+    + void set_all_data(int id, String date, String title, String main_text, int flag)
+    + void debug_out()
+}
+
 ' 関係
 ' Json <|-- SettingJson : 継承
 Json <|-- SettingJson
@@ -56,4 +83,5 @@ Setting "1" *-- "1" SettingJson
 Setting "1" *-- "1" Main
 Debugger "1" o-- "1" Main
 Debugger "1" o-- "1" SettingJson
+DiaryData "1" *-- "1.." SQLite
 @enduml
