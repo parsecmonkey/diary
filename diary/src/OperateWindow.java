@@ -31,6 +31,7 @@ public class OperateWindow {
 
         window.setTextWindow(); // ウィンドウにテキストを表示
         window.setTextArea("kis", 15); // ウィンドウにテキストエリアを設置
+        window.setBoxColor(); // ウィンドウに枠線カラー指定チェックボックスを設置
 
         window.setVisible(); // 最後にウィンドウを表示
     }
