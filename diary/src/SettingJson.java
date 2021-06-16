@@ -31,7 +31,7 @@ public final class SettingJson extends Json {
     // ファイルへの書き出し
     public void exportJSON(Setting setting) {
 
-        Debugger.out(setting_file_path, "inf");
+        Debugger.out(setting_file_path, 0);
 
         try {
             write_setting(new File(setting_file_path), setting);

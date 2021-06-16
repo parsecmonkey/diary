@@ -42,22 +42,31 @@ class SettingJson {
 
 class Debugger{
     {static}+ void setDebug()
+    {static}+ void out(String text, String label)
+    {static}+ void out(String text, int label_level)
+    {static}+ void debug_out(DiaryData diaryData)
 }
 
 ' DB関連
 
 class SQLite{
-    - Connection conn
-    - Statement stm
-    - String dbPath
-    - String table_name
+    # Connection conn
+    # Statement stm
+    # String dbPath
+    # String table_name
     
     + void create_table() 
-    + void insert(String date, String title, String main_text, int flag)
-    + DiaryData select(int id)
-    + DiaryData select(String date)
+    + void insert(int year,int month,int day, String title, String main_text, int flag)
     + void drop_table()
     + void dbClose()
+}
+
+class DiarySQLite{
+    - DiaryData diaryData
+    + void select(int id)
+    + void select(int year,int month,int day)
+    + DiaryData getDiaryData()
+    + void setDiaryData(DiaryData diaryData) {
 }
 
 class DiaryData{
@@ -67,9 +76,23 @@ class DiaryData{
     + String main_text
     + int flag
 
-    + void set_all_data(int id, String date, String title, String main_text, int flag)
-    + void debug_out()
+    + int getId()
+    + void setId(int id)
+    + int getYear()
+    + void setYear(int year)
+    + int getMonth()
+    + void setMonth(int month)
+    + int getDay()
+    + void setDay(int day)
+    + String getTitle()
+    + void setTitle(String title)
+    + String getMain_text()
+    + void setMain_text(String main_text)
+    + int getFlag()
+    + void setFlag(int flag) 
 }
+
+
 
 ' 関係
 ' Json <|-- SettingJson : 継承
@@ -81,7 +104,6 @@ EditWindow "1" *-- "1" OperateWindow
 OperateWindow "1" *-- "1" Main
 Setting "1" *-- "1" SettingJson
 Setting "1" *-- "1" Main
-Debugger "1" o-- "1" Main
-Debugger "1" o-- "1" SettingJson
-DiaryData "1" *-- "1.." SQLite
+DiaryData "1" *-- "1" DiarySQLite
+SQLite "1" <|-- "1" DiarySQLite
 @enduml
