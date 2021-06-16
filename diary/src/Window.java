@@ -69,6 +69,7 @@ public class Window extends JFrame {
         panel.setLayout(g1);
 		for (int i = 0; i < 31; i++) {
             JButton btn = new JButton("" + (i+1));
+            btn.addActionListener(new Action1());
             panel.add(btn);
 		}
 
