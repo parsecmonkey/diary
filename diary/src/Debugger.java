@@ -56,8 +56,15 @@ public final class Debugger {
 
     // DiaryData内の変数を出力
     public static void debug_out(DiaryData diaryData) {
-        Debugger.out("\n== DEBUG DIARY DATA ==\nid: " + String.valueOf(diaryData.id) + "\ndate: " + diaryData.date
-                + "\ntitle: " + diaryData.title + "\nmain_text: " + diaryData.main_text + "\nflag: "
-                + String.valueOf(diaryData.flag) + "\n");
+        String id = String.valueOf(diaryData.getId());
+        String year = String.valueOf(diaryData.getYear());
+        String month = String.valueOf(diaryData.getMonth());
+        String day = String.valueOf(diaryData.getDay());
+        String title = diaryData.getTitle();
+        String main_text = diaryData.getTitle();
+        String flag = String.valueOf(diaryData.getFlag());
+
+        Debugger.out("\n== DEBUG DIARY DATA ==\nid: " + id + "\ndate: " + year + "-" + month + "-" + day + "\ntitle: "
+                + title + "\nmain_text: " + main_text + "\nflag: " + flag + "\n");
     }
 }

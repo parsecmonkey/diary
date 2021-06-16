@@ -10,6 +10,16 @@ public class DiarySQLite extends SQLite {
         this.diaryData = new DiaryData();
     }
 
+    private void setDiaryData(ResultSet resultSet) throws SQLException {
+        this.diaryData.setId(resultSet.getInt("id"));
+        this.diaryData.setYear(resultSet.getInt("year"));
+        this.diaryData.setMonth(resultSet.getInt("month"));
+        this.diaryData.setDay(resultSet.getInt("day"));
+        this.diaryData.setTitle(resultSet.getString("title"));
+        this.diaryData.setMain_text(resultSet.getString("main_text"));
+        this.diaryData.setFlag(resultSet.getInt("flag"));
+    }
+
     /*
      * select文 はじめ
      */
@@ -19,23 +29,21 @@ public class DiarySQLite extends SQLite {
             final String select_sql = "select * from " + this.table_name + " where id = ? ";
             final PreparedStatement prepareStatement = this.conn.prepareStatement(select_sql);
             prepareStatement.setInt(1, id); // selectを実行
-            ResultSet resultSet = prepareStatement.executeQuery();
-            this.diaryData.set_all_data(resultSet.getInt("id"), resultSet.getString("date"),
-                    resultSet.getString("title"), resultSet.getString("main_text"), resultSet.getInt("flag"));
+            this.setDiaryData(prepareStatement.executeQuery());
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void select(String date) {
+    public void select(int year, int month, int day) {
         // 日付でselect
         try {
-            final String select_sql = "select * from " + this.table_name + " where date = ? ";
+            final String select_sql = "select * from " + this.table_name + " where year = ? and month = ? and day= ?";
             final PreparedStatement prepareStatement = this.conn.prepareStatement(select_sql);
-            prepareStatement.setString(1, date); // selectを実行
-            ResultSet resultSet = prepareStatement.executeQuery();
-            this.diaryData.set_all_data(resultSet.getInt("id"), resultSet.getString("date"),
-                    resultSet.getString("title"), resultSet.getString("main_text"), resultSet.getInt("flag"));
+            prepareStatement.setInt(1, year); // selectを実行
+            prepareStatement.setInt(2, month); // selectを実行
+            prepareStatement.setInt(3, day); // selectを実行
+            this.setDiaryData(prepareStatement.executeQuery());
         } catch (SQLException e) {
             e.printStackTrace();
         }

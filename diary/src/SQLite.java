@@ -32,7 +32,7 @@ public class SQLite {
         try {
             // テーブルを生成する
             final String create_table_sql = "CREATE TABLE IF NOT EXISTS " + this.table_name
-                    + "(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, title TEXT, main_text TEXT, flag INTEGER)";
+                    + "(id INTEGER PRIMARY KEY AUTOINCREMENT, year INTEGER, month INTEGER, day INTEGER, title TEXT, main_text TEXT, flag INTEGER)";
             this.stm.execute(create_table_sql);
             this.stm.close();
 
@@ -42,15 +42,18 @@ public class SQLite {
         }
     }
 
-    public void insert(String date, String title, String main_text, int flag) {
+    public void insert(int year, int month, int day, String title, String main_text, int flag) {
         try {
             this.conn.setAutoCommit(false);
-            final String sql = "INSERT INTO " + this.table_name + " (date, title, main_text, flag) values (?, ?, ?, ?)";
+            final String sql = "INSERT INTO " + this.table_name
+                    + " (year, month, day, title, main_text, flag) values (?, ?, ?, ?, ?, ?)";
             final PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
-            prepareStatement.setString(1, date);
-            prepareStatement.setString(2, title);
-            prepareStatement.setString(3, main_text);
-            prepareStatement.setInt(4, flag);
+            prepareStatement.setInt(1, year);
+            prepareStatement.setInt(2, month);
+            prepareStatement.setInt(3, day);
+            prepareStatement.setString(4, title);
+            prepareStatement.setString(5, main_text);
+            prepareStatement.setInt(6, flag);
             prepareStatement.executeUpdate();
             this.conn.commit();
             this.conn.setAutoCommit(true);

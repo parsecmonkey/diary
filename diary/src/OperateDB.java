@@ -31,8 +31,8 @@ public class OperateDB {
         this.sqlite.create_table();
     }
 
-    public void add(String date, String title, String diary_main_text, int flag) {
-        this.sqlite.insert(date, title, diary_main_text, flag);// insert文を実行
+    public void add(int year, int month, int day, String title, String diary_main_text, int flag) {
+        this.sqlite.insert(year, month, day, title, diary_main_text, flag);// insert文を実行
     }
 
     // get
@@ -41,13 +41,8 @@ public class OperateDB {
         return this.sqlite.getDiaryData();
     }
 
-    public DiaryData get(String yyyy, String mm, String dd) {
-        this.sqlite.select(yyyy + "-" + mm + "-" + dd);// 日付情報で取得
-        return this.sqlite.getDiaryData();
-    }
-
-    public DiaryData get(String date) {
-        this.sqlite.select(date);// 日付情報で取得
+    public DiaryData get(int year, int month, int day) {
+        this.sqlite.select(year, month, day);// 日付情報で取得
         return this.sqlite.getDiaryData();
     }
     // get終わり

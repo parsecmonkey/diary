@@ -9,7 +9,8 @@ class TestDB {
 
         OperateDB operateDB = new OperateDB();// DB操作インスタンス
         operateDB.reset(); // DBの情報をすべて消去する
-        operateDB.add("2021-06-16", "タイトルっす", "本文でえすうよお", 0); // DBに情報を追加
+        // operateDB.add("2021-06-16", "タイトルっす", "本文でえすうよお", 0); // DBに情報を追加
+        operateDB.add(2021, 6, 16, "タイトルっす", "本文でえすうよお", 0); // DBに情報を追加
 
         // 日記データの構造取得
         DiaryData diaryData = new DiaryData();
@@ -22,8 +23,7 @@ class TestDB {
         diaryData = operateDB.get(1); // id=1の情報を取得
         Debugger.debug_out(diaryData);
 
-        diaryData = operateDB.get("2021-06-16"); // 日付情報で取得
-        // diaryData = operateDB.get("2021", "06", "16"); // 引数指定はyyyy,mm,ddでもOK
+        diaryData = operateDB.get(2021, 6, 16); // 引数指定はyyyy,mm,dd
         Debugger.debug_out(diaryData);
 
         // DBを使用しなくなったらDBを閉じる(忘れないように)
