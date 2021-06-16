@@ -10,4 +10,4 @@ The files in UML directory are written in PlantUML.
 - class.pu -> class diagram
 
 ## class diagram
-<img src="class/class.png">
+<img src="image/class.png">
