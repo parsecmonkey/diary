@@ -7,6 +7,13 @@ class TestDB {
     public static void main(String args[]) {
         Debugger.out("Start Test.", 0);
 
+        // dataパス設定
+        final String exe_path = System.getProperty("user.dir");
+        final String data_path = "/diary/data/"; // データディレクトリパス
+        Setting.exe_path = exe_path;
+        Setting.data_path = data_path;
+
+        // DB操作
         OperateDB operateDB = new OperateDB();// DB操作インスタンス
         operateDB.reset(); // DBの情報をすべて消去する
 

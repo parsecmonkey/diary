@@ -6,8 +6,8 @@ public class OperateDB {
     private final String table_name = "Diary";
 
     public OperateDB() {
-        final String exe_path = System.getProperty("user.dir");
-        final String data_path = "/diary/data/"; // データディレクトリパス
+        final String exe_path = Setting.exe_path;// 実行パス
+        final String data_path = Setting.data_path; // データディレクトリパス
         final String dbName = "diary.db"; // データベースの名前
         final String dbPath = exe_path + data_path + dbName; // データベースのパス
 
