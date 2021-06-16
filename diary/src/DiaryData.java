@@ -14,18 +14,6 @@ public class DiaryData {
         this.id = -1;
     }
 
-    // public void set_all_data(int id, int year, int month, int day, String date,
-    // String title, String main_text,
-    // int flag) {
-    // this.id = id;
-    // this.year = year;
-    // this.month = month;
-    // this.day = day;
-    // this.title = title;
-    // this.main_text = main_text;
-    // this.flag = flag;
-    // }
-
     // getter and setter
     public int getId() {
         return id;

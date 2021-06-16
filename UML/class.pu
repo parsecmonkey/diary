@@ -56,7 +56,7 @@ class SQLite{
     # String table_name
     
     + void create_table() 
-    + void insert(String date, String title, String main_text, int flag)
+    + void insert(int year,int month,int day, String title, String main_text, int flag)
     + void drop_table()
     + void dbClose()
 }
@@ -64,7 +64,7 @@ class SQLite{
 class DiarySQLite{
     - DiaryData diaryData
     + void select(int id)
-    + void select(String date)
+    + void select(int year,int month,int day)
     + DiaryData getDiaryData()
     + void setDiaryData(DiaryData diaryData) {
 }
@@ -76,7 +76,20 @@ class DiaryData{
     + String main_text
     + int flag
 
-    + void set_all_data(int id, String date, String title, String main_text, int flag)
+    + int getId()
+    + void setId(int id)
+    + int getYear()
+    + void setYear(int year)
+    + int getMonth()
+    + void setMonth(int month)
+    + int getDay()
+    + void setDay(int day)
+    + String getTitle()
+    + void setTitle(String title)
+    + String getMain_text()
+    + void setMain_text(String main_text)
+    + int getFlag()
+    + void setFlag(int flag) 
 }
 
 
