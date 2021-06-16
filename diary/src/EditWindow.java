@@ -1,6 +1,7 @@
 package diary.src;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 // import java.awt.event.*;
 
@@ -19,9 +20,9 @@ public class EditWindow extends Window {
     @Override
     public void setTextWindow() {
         JPanel panel = new JPanel();
-        JLabel label = new JLabel("you clicked me");
+        JLabel label = new JLabel("2021/06/16");
+
         panel.add(label);
-        add(panel);
 
         getContentPane().add(panel, BorderLayout.PAGE_START);
     }
@@ -30,13 +31,26 @@ public class EditWindow extends Window {
     public void setTextArea(String firstText, int columns) {
         JTextArea textarea = new JTextArea(firstText); // テキストエリアの初期値を設定
         textarea.setColumns(columns); // テキストエリアの列数を指定
-        textarea.setPreferredSize(new Dimension(200, 50)); // サイズを指定
+        textarea.setPreferredSize(new Dimension(300, 400)); // サイズを指定
         textarea.setLineWrap(true); // 折り返し指定
 
-        JPanel p = new JPanel();
-        p.add(textarea);
+        JPanel panel = new JPanel();
+        panel.add(textarea);
 
-        getContentPane().add(p, BorderLayout.CENTER);
+        getContentPane().add(panel, BorderLayout.CENTER);
     }
 
+    // ウィンドウに枠線カラー指定チェックボックスを設置
+    public void setBoxColor() {
+        JCheckBox check1 = new JCheckBox();
+        JCheckBox check2 = new JCheckBox();
+        check1.setBorderPainted(true);
+        check1.setBorder(new LineBorder(Color.RED, 2, false)); // 枠線の色を指定
+
+        JPanel p = new JPanel();
+        p.add(check1);
+        p.add(check2);
+
+        getContentPane().add(p, BorderLayout.PAGE_END);
+    }
 }

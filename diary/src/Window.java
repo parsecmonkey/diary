@@ -40,37 +40,41 @@ public class Window extends JFrame {
     // ウィンドウのテキスト設定
     public void setTextWindow() {
         JPanel panel = new JPanel(); //パネルのインスタンスの生成
-        JLabel label = new JLabel("LGTM!"); //ラベルのインスタンスの生成      
+        JLabel label = new JLabel("2021/06"); //ラベルのインスタンスの生成      
 
         // テキスト設定
         label.setFont(new Font("Arial", Font.PLAIN, 30));
         label.setForeground(Color.BLUE);
         
         panel.add(label); //ラベルをパネルに配置
-        add(panel, BorderLayout.CENTER); //パネルをウインドウの表示領域に配置
+        add(panel, BorderLayout.NORTH); //パネルをウインドウの表示領域に配置
     }
 
     // ウィンドウのボタン設定
     public void setButtonWindow() {
+        JPanel panelAction = new JPanel();
         JPanel panel = new JPanel();
 
         // ボタンを追加
-        JButton btn1 = new JButton("North");
-        JButton btn2 = new JButton("Push");
-        JButton btn3 = new JButton("West");
-        JButton btn4 = new JButton("East");
+        JButton btn1 = new JButton("Push");
 
         // ボタンクリック
-        btn2.addActionListener(new Action1());
+        btn1.addActionListener(new Action1());
 
         // パネルに追加
-        panel.add(btn2);
+        panelAction.add(btn1);
+
+        // 日付ボタン設置
+        GridLayout g1 = new GridLayout(0, 7, 20, 20); // 行 列 横 縦
+        panel.setLayout(g1);
+		for (int i = 0; i < 31; i++) {
+            JButton btn = new JButton("" + (i+1));
+            panel.add(btn);
+		}
 
         // ボタンを表示
-        getContentPane().add(btn1, BorderLayout.NORTH);
-        getContentPane().add(panel, BorderLayout.SOUTH);
-        getContentPane().add(btn3, BorderLayout.WEST);
-        getContentPane().add(btn4, BorderLayout.EAST);
+        getContentPane().add(panel, BorderLayout.CENTER);
+        getContentPane().add(panelAction, BorderLayout.SOUTH);
     }
 
     // ボタンクリック時のアクション
