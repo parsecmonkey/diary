@@ -35,6 +35,7 @@ public final class SettingJson extends Json {
 
         try {
             write_setting(new File(setting_file_path), setting);
+            write_setting_child_window(new File(setting_file_path), setting);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,6 +63,27 @@ public final class SettingJson extends Json {
         }
     }
 
+    // ちっちゃいウィンドウ
+    private void write_setting_child_window(File file, Setting setting) throws IOException {
+
+        try (JsonWriter writer = new JsonWriter(new FileWriter(file))) {
+            writer.setIndent("    "); // インデント
+
+            writer.beginObject();
+            writer.name("window-child");
+            writer.beginArray();
+
+            writer.beginObject();
+            writer.name("title").value(Setting.window_title);
+            writer.name("width").value(Setting.window_width);
+            writer.name("height").value(Setting.window_height);
+            writer.endObject();
+
+            writer.endArray();
+            writer.endObject();
+        }
+    }
+
     // Json読み込み Settingクラスへ設定を入れ込む
     public void importJSON() {
         try {
@@ -73,6 +95,14 @@ public final class SettingJson extends Json {
                 Setting.window_title = parameter.get("title").getAsString();
                 Setting.window_width = parameter.get("width").getAsInt();
                 Setting.window_height = parameter.get("height").getAsInt();
+            }
+
+            JsonArray ja_c = je.getAsJsonArray("window-child");
+            for (Object o : ja_c) {
+                JsonObject parameter = (JsonObject) o;
+                Setting.window_child_title = parameter.get("title").getAsString();
+                Setting.window_child_width = parameter.get("width").getAsInt();
+                Setting.window_child_height = parameter.get("height").getAsInt();
             }
         } catch (JsonIOException e) {
             e.printStackTrace();

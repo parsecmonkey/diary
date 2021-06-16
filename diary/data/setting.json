@@ -5,5 +5,12 @@
             "width": 800,
             "height": 480
         }
+    ],
+    "window-child": [
+        {
+            "title": "ちっちゃい画面",
+            "width": 800,
+            "height": 480
+        }
     ]
 }
