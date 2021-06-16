@@ -64,7 +64,16 @@ public final class Debugger {
         String main_text = diaryData.getTitle();
         String flag = String.valueOf(diaryData.getFlag());
 
-        Debugger.out("\n== DEBUG DIARY DATA ==\nid: " + id + "\ndate: " + year + "-" + month + "-" + day + "\ntitle: "
-                + title + "\nmain_text: " + main_text + "\nflag: " + flag + "\n");
+        Debugger.out("\n== DIARY DATA ==\nid: " + id + "\ndate: " + year + "-" + month + "-" + day + "\ntitle: " + title
+                + "\nmain_text: " + main_text + "\nflag: " + flag + "\n");
+    }
+
+    // Settingの情報をすべて出力
+    public static void debug_setting_out() {
+        Debugger.out("\n== SETTING DATA ==\n" + "window-title: " + Setting.window_title + "\n" + "window-width: "
+                + Setting.window_width + "\n" + "window-height" + Setting.window_height + "\n" + "window-child-title: "
+                + Setting.window_child_title + "\n" + "window-child-width: " + Setting.window_child_width + "\n"
+                + "window-child-height" + Setting.window_child_height + "\n" + "exe_path: " + Setting.exe_path + "\n"
+                + "data_path: " + Setting.data_path);
     }
 }
