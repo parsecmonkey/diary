@@ -65,7 +65,7 @@ public class Window extends JFrame {
         panelAction.add(btn1);
 
         // 日付ボタン設置
-        GridLayout g1 = new GridLayout(0, 7, 20, 20); // 行 列 縦 横
+        GridLayout g1 = new GridLayout(0, 7, 20, 20); // 行 列 横 縦
         panel.setLayout(g1);
 		for (int i = 0; i < 31; i++) {
             JButton btn = new JButton("" + (i+1));
