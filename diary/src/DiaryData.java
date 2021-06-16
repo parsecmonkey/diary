@@ -20,8 +20,5 @@ public class DiaryData {
         this.flag = flag;
     }
 
-    public void debug_out() {
-        Debugger.out("\n== DEBUG DIARY DATA ==\nid: " + String.valueOf(id) + "\ndate: " + date + "\ntitle: " + title
-                + "\nmain_text: " + main_text + "\nflag: " + String.valueOf(flag) + "\n");
-    }
+
 }

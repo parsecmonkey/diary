@@ -4,7 +4,7 @@ package diary.src;
 
 class Main {
     public static void main(String args[]) {
-        Debugger.out("Start program.", "inf");
+        Debugger.out("Start program.", 0);
 
         // 設定の設定
         SettingJson json = new SettingJson(); // Json操作

@@ -4,11 +4,11 @@ import java.sql.*;
 
 public class SQLite {
 
-    private Connection conn = null;
-    private Statement stm = null;
+    protected Connection conn = null;
+    protected Statement stm = null;
 
-    private String dbPath;
-    private String table_name;
+    protected String dbPath;
+    protected String table_name;
 
     SQLite(String dbPath) {
         this.dbPath = dbPath;
@@ -58,46 +58,6 @@ public class SQLite {
             e.printStackTrace();
         }
     }
-
-    /*
-     * select文 はじめ
-     */
-    public DiaryData select(int id) {
-        // idでselect
-        DiaryData diaryData = new DiaryData();
-        try {
-            final String select_sql = "select * from " + this.table_name + " where id = ? ";
-            final PreparedStatement prepareStatement = this.conn.prepareStatement(select_sql);
-            prepareStatement.setInt(1, id); // selectを実行
-            ResultSet resultSet = prepareStatement.executeQuery();
-            diaryData.set_all_data(resultSet.getInt("id"), resultSet.getString("date"), resultSet.getString("title"),
-                    resultSet.getString("main_text"), resultSet.getInt("flag"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return diaryData;
-    }
-
-    public DiaryData select(String date) {
-        // 日付でselect
-        DiaryData diaryData = new DiaryData();
-        try {
-            final String select_sql = "select * from " + this.table_name + " where date = ? ";
-            final PreparedStatement prepareStatement = this.conn.prepareStatement(select_sql);
-            prepareStatement.setString(1, date); // selectを実行
-            ResultSet resultSet = prepareStatement.executeQuery();
-            diaryData.set_all_data(resultSet.getInt("id"), resultSet.getString("date"), resultSet.getString("title"),
-                    resultSet.getString("main_text"), resultSet.getInt("flag"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return diaryData;
-    }
-    /*
-     * select文 終わり
-     */
 
     public void drop_table() {
         // テーブル削除
