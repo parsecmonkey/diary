@@ -45,6 +45,18 @@ public class OperateDB {
         this.sqlite.select(year, month, day);// 日付情報で取得
         return this.sqlite.getDiaryData();
     }
+
+    public DiaryData get_month(int month) {
+        // 月のみで指定
+        this.sqlite.select_month(month);// 日付情報で取得
+        return this.sqlite.getDiaryData();
+    }
+
+    public DiaryData get_all() {
+        // すべて取得
+        this.sqlite.select_all();// すべて取得
+        return this.sqlite.getDiaryData();
+    }
     // get終わり
 
     public void closeDB() {

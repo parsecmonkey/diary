@@ -1,6 +1,10 @@
 package diary.src;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DiaryData {
+    private List<DiaryData> listDiaryData = new ArrayList<DiaryData>();
     private int id;
     private int year;
     private int month;
@@ -10,8 +14,47 @@ public class DiaryData {
     private int flag;
 
     DiaryData() {
-        // 初期状態 id=-1を設定
-        this.id = -1;
+        this.listDiaryData.add(this);
+    }
+
+    public void add(DiaryData diaryData) {
+        this.listDiaryData.add(diaryData);
+    }
+
+    public DiaryData get() {
+        return this.listDiaryData.get(0);
+    }
+
+    public DiaryData pop() {
+        if (this.next())
+            return this.get();
+        else
+            return null;
+    }
+
+    public DiaryData select(int idx_num) {
+        List<DiaryData> temp = this.listDiaryData;
+        DiaryData foundData = null;
+        int i;
+        for (i = 0; i <= idx_num; i++)
+            foundData = this.pop();
+        this.listDiaryData = temp;
+        return foundData;
+    }
+
+    public void clear() {
+        this.listDiaryData.clear();
+        this.listDiaryData.add(this); // 消去しても自分自身を入れておく
+    }
+
+    public boolean next() {
+        try {
+            this.listDiaryData.get(1); // 次がなければここでExceptionが発生
+            this.listDiaryData.remove(0);
+            return true;
+        } catch (IndexOutOfBoundsException e) { // listDiaryDataがカラであればnullを返す
+            return false;
+        }
     }
 
     // getter and setter
