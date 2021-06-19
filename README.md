@@ -1,15 +1,15 @@
-# 日記アプリケーション
+# Diary for Windows
 
-言語
+Languages
 - Java
 
-データベース
+RDBMS
 - SQLite
 
 ##
-- src -> ソースコード
-- UML -> クラス図
+- src -> source code
+- UML -> class diagram
 
-## 使用方法
+## Usage
 
-工事中
+under construction
