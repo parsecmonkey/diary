@@ -10,18 +10,7 @@ public class DiarySQLite extends SQLite {
         this.diaryData = new DiaryData();
     }
 
-    private void setDiaryData(ResultSet resultSet) throws SQLException {
-        this.diaryData.setId(resultSet.getInt("id"));
-        this.diaryData.setYear(resultSet.getInt("year"));
-        this.diaryData.setMonth(resultSet.getInt("month"));
-        this.diaryData.setDay(resultSet.getInt("day"));
-        this.diaryData.setTitle(resultSet.getString("title"));
-        this.diaryData.setMain_text(resultSet.getString("main_text"));
-        this.diaryData.setFlag(resultSet.getInt("flag"));
-        this.diaryData.add(this.diaryData);
-    }
-
-    private DiaryData setDiaryData_diaryData_return(ResultSet resultSet) throws SQLException {
+    private DiaryData setDiaryData(ResultSet resultSet) throws SQLException {
         DiaryData temp = new DiaryData();
         temp.setId(resultSet.getInt("id"));
         temp.setYear(resultSet.getInt("year"));
@@ -30,19 +19,21 @@ public class DiarySQLite extends SQLite {
         temp.setTitle(resultSet.getString("title"));
         temp.setMain_text(resultSet.getString("main_text"));
         temp.setFlag(resultSet.getInt("flag"));
+
         return temp;
     }
 
-    /*
-     * select文 はじめ
-     */
+    // -*-*-*-*-*-*-*-*-*-*-*-*-*-
+    // select
+    // -*-*-*-*-*-*-*-*-*-*-*-*-*-
     public void select(int id) {
         // idでselect
         try {
             final String select_sql = "select * from " + this.table_name + " where id = ? ";
             final PreparedStatement prepareStatement = this.conn.prepareStatement(select_sql);
             prepareStatement.setInt(1, id); // selectを実行
-            this.setDiaryData(prepareStatement.executeQuery());
+            ResultSet resultSet = prepareStatement.executeQuery();
+            this.diaryData = this.setDiaryData(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -57,7 +48,7 @@ public class DiarySQLite extends SQLite {
             prepareStatement.setInt(2, month); // selectを実行
             prepareStatement.setInt(3, day); // selectを実行
             ResultSet resultSet = prepareStatement.executeQuery();
-            this.diaryData = this.setDiaryData_diaryData_return(resultSet);
+            this.diaryData = this.setDiaryData(resultSet);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,7 +61,7 @@ public class DiarySQLite extends SQLite {
             final PreparedStatement prepareStatement = this.conn.prepareStatement(select_sql);
             ResultSet resultSet = prepareStatement.executeQuery();
             while (resultSet.next()) {
-                DiaryData temp = this.setDiaryData_diaryData_return(resultSet);
+                DiaryData temp = this.setDiaryData(resultSet);
                 this.diaryData.add(temp);
             }
         } catch (SQLException e) {
@@ -87,7 +78,7 @@ public class DiarySQLite extends SQLite {
             ResultSet resultSet = prepareStatement.executeQuery();
 
             while (resultSet.next()) {
-                DiaryData temp = this.setDiaryData_diaryData_return(resultSet);
+                DiaryData temp = this.setDiaryData(resultSet);
                 this.diaryData.add(temp);
             }
         } catch (SQLException e) {

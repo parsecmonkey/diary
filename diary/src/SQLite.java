@@ -74,6 +74,26 @@ public class SQLite {
         }
     }
 
+    // -*-*-*-*-*-*-*-*-*-*-*-*-*-
+    // update
+    // -*-*-*-*-*-*-*-*-*-*-*-*-*-
+    public void update_title(int year, int month, int day, String title) {
+        // 日付でselect
+        try {
+            final String select_sql = "update " + this.table_name
+                    + " set title = ? where year = ? and month = ? and day = ?";
+            final PreparedStatement prepareStatement = this.conn.prepareStatement(select_sql);
+            prepareStatement.setString(1, title);
+            prepareStatement.setInt(2, year);
+            prepareStatement.setInt(3, month);
+            prepareStatement.setInt(4, day);
+            prepareStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * DB CLOSE処理
      */
