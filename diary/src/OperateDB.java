@@ -77,6 +77,14 @@ public class OperateDB {
         Debugger.out("UPDATE year, month, day, main_text: " + String.valueOf(diaryData.getYear()) + ", "
                 + String.valueOf(diaryData.getMonth()) + ", " + String.valueOf(diaryData.getDay()) + ", " + main, 0);
     }
+
+    public void change_flag(DiaryData diaryData, int flag) {
+        // main変更
+        this.sqlite.update_flag(diaryData.getYear(), diaryData.getMonth(), diaryData.getDay(), flag);// update文を実行
+        Debugger.out("UPDATE year, month, day, flag: " + String.valueOf(diaryData.getYear()) + ", "
+                + String.valueOf(diaryData.getMonth()) + ", " + String.valueOf(diaryData.getDay()) + ", "
+                + String.valueOf(flag), 0);
+    }
     // change 終わり
 
     public void closeDB() {
