@@ -5,11 +5,11 @@ import java.sql.*;
 public class DiarySQLite {
     private DiaryData diaryData;
 
-    protected Connection conn = null;
-    protected Statement stm = null;
+    private Connection conn = null;
+    private Statement stm = null;
 
-    protected String dbPath;
-    protected String table_name;
+    private String dbPath;
+    private String table_name;
 
     DiarySQLite(String dbPath) {
 

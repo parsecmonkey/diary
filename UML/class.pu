@@ -47,34 +47,36 @@ class Debugger{
     {static}+ void debug_out(DiaryData diaryData)
 }
 
+note top of Debugger
+     staticで定義．必要に応じて呼び出せる．
+end note
+
+
 ' DB関連
 
-class SQLite{
-    # Connection conn
-    # Statement stm
-    # String dbPath
-    # String table_name
-    
+class "DiarySQLite(SQLite操作)" as DiarySQLite{
+    - DiaryData diaryData
+    - Connection conn
+    - Statement stm
+    - String dbPath
+    - String table_name
+
     + void create_table() 
+    + void select(int id)
+    + void select(int year,int month,int day)
+    + DiaryData getDiaryData()
+    + void setDiaryData(DiaryData diaryData)
     + void insert(int year,int month,int day, String title, String main_text, int flag)
     + void drop_table()
     + void dbClose()
 }
 
-class DiarySQLite{
-    - DiaryData diaryData
-    + void select(int id)
-    + void select(int year,int month,int day)
-    + DiaryData getDiaryData()
-    + void setDiaryData(DiaryData diaryData) {
-}
-
-class DiaryData{
-    + int id
-    + String date
-    + String title
-    + String main_text
-    + int flag
+class "DiaryData(日記情報)" as DiaryData{
+    - int id
+    - String date
+    - String title
+    - String main_text
+    - int flag
 
     + int getId()
     + void setId(int id)
@@ -92,6 +94,28 @@ class DiaryData{
     + void setFlag(int flag) 
 }
 
+class "OperateDB(DB操作仲介)" as OperateDB{
+    - DiarySQLite sqlite
+    - String dbPath
+    - String table_name = "Diary"
+
+    + void reset()
+    + void add(int year, int month, int day, String title, String diary_main_text, int flag)
+    + DiaryData get(int id)
+    + DiaryData get(int year, int month, int day)
+    + DiaryData get_month(int month) 
+    + DiaryData get_all()
+    + void change_title(DiaryData diaryData, String title)
+    + void change_main(DiaryData diaryData, String main)
+    + void change_flag(DiaryData diaryData, int flag)
+    + void closeDB()
+    + String getDbPath()
+}
+
+note bottom of OperateDB
+    DBを操作する際はこのクラスを呼び出してください．
+end note
+
 
 
 ' 関係
@@ -104,6 +128,6 @@ EditWindow "1" *-- "1" OperateWindow
 OperateWindow "1" *-- "1" Main
 Setting "1" *-- "1" SettingJson
 Setting "1" *-- "1" Main
-DiaryData "1" *-- "1" DiarySQLite
-SQLite "1" <|-- "1" DiarySQLite
+DiaryData "1" *-- "1..*" DiarySQLite
+DiarySQLite "1" *-- "1" OperateDB
 @enduml
