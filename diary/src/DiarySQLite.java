@@ -57,8 +57,7 @@ public class DiarySQLite extends SQLite {
             prepareStatement.setInt(2, month); // selectを実行
             prepareStatement.setInt(3, day); // selectを実行
             ResultSet resultSet = prepareStatement.executeQuery();
-            DiaryData temp = this.setDiaryData_diaryData_return(resultSet);
-            this.diaryData.add(temp);
+            this.diaryData = this.setDiaryData_diaryData_return(resultSet);
 
         } catch (SQLException e) {
             e.printStackTrace();

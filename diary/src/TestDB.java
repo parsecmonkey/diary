@@ -29,7 +29,7 @@ class TestDB {
         /*
          * 日記情報を取得する． DiaryData型で返ってくる
          *
-         * 現状はidと日付指定の2種類のみ
+         * 現状はidと日付指定，月指定ができる
          */
         diaryData = operateDB.get(1); // id=1の情報を取得
         Debugger.debug_out(diaryData.get());
@@ -38,59 +38,28 @@ class TestDB {
         Debugger.debug_out(diaryData.get());
 
         diaryData = operateDB.get_month(6); // 6月の情報をすべて取得
-        Debugger.debug_out(diaryData.pop());// 0番目の情報を取得するのにはpopメソッドを使用(0番目は破壊される)(返り値はDiaryData型)
-        Debugger.debug_out(diaryData.pop());// 0番目の情報を取得するのにはpopメソッドを使用(0番目は破壊される)
+        Debugger.debug_out(diaryData.pop()); // 0番目の情報を取得するのにはpopメソッドを使用(0番目は破壊される)(返り値はDiaryData型)
         // Debugger.debug_out(diaryData.pop());// もう無い場合はnullが返る
 
         diaryData.clear(); // DiaryData内の情報をすべて削除できる
 
-        diaryData = new DiaryData();
-
         diaryData.add(operateDB.get(2021, 6, 19)); // 情報を追加できる
         diaryData.add(operateDB.get(2021, 7, 19)); // 情報を追加できる
         diaryData.add(operateDB.get(2021, 7, 19)); // 情報を追加できる
-        // diaryData.add(operateDB.get(2022, 1, 1)); // 情報を追加できる
-        Debugger.debug_out(diaryData.get());
 
-        Debugger.out("\n\nklsjil;gjqwe;\n");
-        while (diaryData.next()) {
+        Debugger.out("\n\n== output get all ==\n");
+        while (diaryData.next()) { // nextで次の要素へ
+            // diaryDataに所持している情報がなくなるまで
             Debugger.debug_out(diaryData.get());
         }
 
-        // Debugger.debug_out(diaryData.pop());
-        // Debugger.debug_out(diaryData.pop());
+        diaryData.clear(); // 削除
+        diaryData = operateDB.get_all(); // get_allメソッドでDB内の情報をすべて取得できる
 
-        // Debugger.out("\n\n");
-        // DiaryData temp = operateDB.get_all();
-        // while (temp.next()) {
-        // Debugger.debug_out(temp.get());
-        // }
-
-        // DiaryData t3 = new DiaryData();
-        // t3.setId(2);
-        // t3.setYear(2002);
-        // t3.setMonth(2);
-        // t3.setDay(5);
-        // t3.setTitle("t");
-        // t3.setMain_text("d");
-        // t3.setFlag(2);
-
-        // diaryData.add(t3); // DiaryDataの情報を追加できる
-
-        // Debugger.debug_out(diaryData.select(2)); // インデクス番号で指定できる
-        // // Debugger.debug_out(temp.select(100)); // インデクスの範囲を外れるとnullが返る
-
-        // //
-        // Debugger.debug_out(diaryData.get()); // 0番目の情報を取得するのにはgetメソッドを使用(非破壊)
-
-        // Debugger.debug_out(diaryData.pop()); // 0番目の情報を取得するのにはpopメソッドを使用(0番目は破壊される)
-        // Debugger.debug_out(diaryData.pop()); // 0番目の情報を取得するのにはpopメソッドを使用(0番目は破壊される)
-        // Debugger.debug_out(diaryData.pop()); // 0番目の情報を取得するのにはpopメソッドを使用(0番目は破壊される)
-        // Debugger.debug_out(diaryData.pop()); // もう無い場合は null が返される
-
-        // while (temp.next()) {
-        // Debugger.debug_out(temp.get());
-        // }
+        Debugger.out("\n\n== output select ==\n");
+        while (diaryData.next()) {
+            Debugger.debug_out(diaryData.get());
+        }
 
         // DBを使用しなくなったらDBを閉じる(忘れないように)
         operateDB.closeDB();
