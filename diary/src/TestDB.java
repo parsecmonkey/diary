@@ -64,8 +64,10 @@ class TestDB {
         // UPDATEの実行
         diaryData = operateDB.get(2022, 1, 1); // 2022-1-1の情報を取得
         Debugger.debug_out(diaryData.get()); // 変更前を確認
-        String changed_title = "変更したタイトル";
-        operateDB.change_title(diaryData.get(), changed_title);
+        operateDB.change_title(diaryData.get(), "変更したタイトル"); // タイトルの変更
+        Debugger.debug_out(operateDB.get(2022, 1, 1)); // 変わっていることを確認
+
+        operateDB.change_main(diaryData.get(), "本文は変更されましたよお"); // 本文の変更
         Debugger.debug_out(operateDB.get(2022, 1, 1)); // 変わっていることを確認
 
         // DBを使用しなくなったらDBを閉じる(忘れないように)
