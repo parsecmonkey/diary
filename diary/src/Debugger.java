@@ -22,6 +22,10 @@ public final class Debugger {
         System.out.println(label_level_0 + ": " + text);
     }
 
+    public static void out(int text) {
+        System.out.println(label_level_0 + ": " + String.valueOf(text));
+    }
+
     public static void out(String text, String label) {
         if (label.equals(label_level_0))
             System.out.println(label_level_0 + ": " + text);
