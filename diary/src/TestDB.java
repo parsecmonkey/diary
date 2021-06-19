@@ -19,9 +19,9 @@ class TestDB {
 
         // 年，月，日，タイトル，日記本文，フラグ
         operateDB.add(2021, 6, 16, "タイトルっす", "本文でえすうよお", 0); // DBに情報を追加
-        operateDB.add(2021, 6, 19, "タイトル2", "2", 1); // DBに情報を追加
-        operateDB.add(2021, 7, 19, "タイトル3", "3", 0); // DBに情報を追加
-        operateDB.add(2022, 1, 1, "2022", "1-1", 2); // DBに情報を追加
+        operateDB.add(2021, 6, 19, "タイトル2", "2", 2); // DBに情報を追加
+        operateDB.add(2021, 7, 19, "タイトル3", "3", 1); // DBに情報を追加
+        operateDB.add(2022, 1, 1, "変更前タイトル", "変更前本文", 0); // DBに情報を追加
 
         // 日記データの構造取得
         DiaryData diaryData = new DiaryData();
@@ -60,6 +60,15 @@ class TestDB {
         while (diaryData.next()) {
             Debugger.debug_out(diaryData.get());
         }
+
+        // UPDATEの実行
+        Debugger.out("\n\n== data change ==\n");
+        diaryData = operateDB.get(2022, 1, 1); // 2022-1-1の情報を取得
+        Debugger.debug_out(diaryData.get()); // 変更前を確認
+        operateDB.change_title(diaryData.get(), "変更したタイトル"); // タイトルの変更
+        operateDB.change_main(diaryData.get(), "本文は変更されましたよお"); // 本文の変更
+        operateDB.change_flag(diaryData.get(), 1); // フラグの変更
+        Debugger.debug_out(operateDB.get(2022, 1, 1)); // 変わっていることを確認
 
         // DBを使用しなくなったらDBを閉じる(忘れないように)
         operateDB.closeDB();

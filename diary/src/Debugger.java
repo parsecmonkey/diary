@@ -65,7 +65,7 @@ public final class Debugger {
         String month = String.valueOf(diaryData.getMonth());
         String day = String.valueOf(diaryData.getDay());
         String title = diaryData.getTitle();
-        String main_text = diaryData.getTitle();
+        String main_text = diaryData.getMain_text();
         String flag = String.valueOf(diaryData.getFlag());
 
         Debugger.out("\n== DIARY DATA ==\nid: " + id + "\ndate: " + year + "-" + month + "-" + day + "\ntitle: " + title
