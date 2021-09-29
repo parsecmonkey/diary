@@ -1,5 +1,8 @@
 package diary.src;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Setting {
     // メインのウィンドウ
     public static String window_title;
@@ -14,6 +17,13 @@ public class Setting {
 
     public static String exe_path;// 実行パス
     public static String data_path; // データディレクトリパス
+
+    // 現在開いている日記編集ウィンドウのリスト
+    public static List<String> open_edit_window_titles = new ArrayList<String>() {
+        {
+            add("");
+        }
+    };
 
     // public Setting() {
     // Setting.window_title = "日記";

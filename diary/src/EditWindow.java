@@ -62,4 +62,11 @@ public class EditWindow extends Window {
 
         this.getContentPane().add(p, BorderLayout.PAGE_END);
     }
+
+    // ウィンドウを閉じる際の処理
+    @Override
+    public void dispose() {
+        Debugger.out(this.getTitle() + " ウィンドウが閉じられました");
+        super.dispose();
+    }
 }
