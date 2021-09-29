@@ -96,52 +96,28 @@ public class DiaryWindow extends Window {
             this.nowDay = day;
         }
 
-        // 同一タイトルのウィンドウが既に開かれているか確認
-        private boolean isOpened(String title) {
-            return Setting.open_edit_window_titles.contains(title);
-        }
-
-        // 開いている編集ウィンドウリストに追加
-        private void addOpenedWindow(String title) {
-            Setting.open_edit_window_titles.add(title);
-        }
-
         // 新しい画面の作成
         public void actionPerformed(ActionEvent e) {
             Debugger.out("CreateEditWindow");
 
             // ウィンドウ設定
             String window_title = String.format("%s年%s月%s日の日記", this.nowYear, this.nowMonth, this.nowDay); // タイトル
+            int window_width = 400; // 高さ
+            int window_height = 400; // 幅
+            EditWindow editWindow = new EditWindow(window_title, window_width, window_height);
 
-            // 同一ウィンドウタイトルで既に開かれているか確認
-            if (this.isOpened(window_title)) {
-                // 既に開かれている場合
-                JOptionPane.showMessageDialog(null, "同じウィンドウは開けません！\n " +window_title+"の日記は既に開いています。");
-            } else {
-                // 開いていない場合
-                this.addOpenedWindow(window_title);
+            // 日付
+            editWindow.setNowDate(this.nowYear, this.nowMonth, this.nowDay);
 
-                // ウィンドウの設定
-                int window_width = 400; // 高さ
-                int window_height = 400; // 幅
-                EditWindow editWindow = new EditWindow(window_title, window_width, window_height);
+            // アイコン
+            editWindow.setImageIcon(Setting.icon_path);
 
-                // 開いているウィンドウに現在のウィンドウタイトルを追加
-                Setting.open_edit_window_titles.add(window_title);
+            editWindow.setTextWindow(); // ウィンドウにテキストを表示
+            editWindow.setTitle(window_title); // タイトルを設定
+            editWindow.setTextArea("", 15); // ウィンドウにテキストエリアを設置
+            editWindow.setBoxColor(); // ウィンドウに枠線カラー指定チェックボックスを設置
 
-                // 日付
-                editWindow.setNowDate(this.nowYear, this.nowMonth, this.nowDay);
-
-                // アイコン
-                editWindow.setImageIcon(Setting.icon_path);
-
-                editWindow.setTextWindow(); // ウィンドウにテキストを表示
-                editWindow.setTitle(window_title); // タイトルを設定
-                editWindow.setTextArea("", 15); // ウィンドウにテキストエリアを設置
-                editWindow.setBoxColor(); // ウィンドウに枠線カラー指定チェックボックスを設置
-
-                editWindow.setVisible(); // 最後にウィンドウを表示
-            }
+            editWindow.setVisible(); // 最後にウィンドウを表示
 
         }
     }
