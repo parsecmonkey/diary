@@ -115,8 +115,8 @@ public class DiaryWindow extends Window {
 
             // 同一ウィンドウタイトルで既に開かれているか確認
             if (this.isOpened(window_title)) {
-                // 既に開かれている場合
-                JOptionPane.showMessageDialog(null, "同じウィンドウは開けません！\n " +window_title+"の日記は既に開いています。");
+                // 既に開かれている場合 メッセージを表示
+                JOptionPane.showMessageDialog(null, "同じウィンドウは開けません！\n " + window_title + "の日記は既に開いています。");
             } else {
                 // 開いていない場合
                 this.addOpenedWindow(window_title);
