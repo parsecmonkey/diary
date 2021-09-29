@@ -11,7 +11,7 @@ public class OperateWindow {
         String window_title = Setting.window_title; // タイトル
         int window_width = Setting.window_width; // 高さ
         int window_height = Setting.window_height; // 幅
-        Window window = new Window(window_title, window_width, window_height);
+        DiaryWindow window = new DiaryWindow(window_title, window_width, window_height);
 
         window.setImageIcon("./diary/img/kis_logo2.png"); // アイコンを設定
         window.setBackground(Color.RED); // 背景設定 ×
