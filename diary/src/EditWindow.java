@@ -17,7 +17,6 @@ public class EditWindow extends Window {
     }
 
     // ウィンドウのテキスト設定
-    @Override
     public void setTextWindow() {
         JPanel panel = new JPanel();
         JLabel label = new JLabel("2021/06/16");
