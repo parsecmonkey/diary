@@ -5,6 +5,7 @@ public class Setting {
     public static String window_title;
     public static int window_width;
     public static int window_height;
+    public static String icon_path;// ファビコンパス
 
     // サブのウィンドウ
     public static String window_child_title;

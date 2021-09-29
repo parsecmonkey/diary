@@ -13,6 +13,7 @@ class Main {
         final String setting_file_name = "setting.json"; // ファイルの名前設定
         Setting.exe_path = exe_path;
         Setting.data_path = data_path;
+        Setting.icon_path = "./diary/img/kis_logo2.png"; // iconのパス
 
         SettingJson json = new SettingJson(); // Json操作
         json.setExe_path(exe_path); // 実行ファイルパス設定
@@ -25,7 +26,7 @@ class Main {
 
         // ウィンドウを操作する
         OperateWindow operateWindow = new OperateWindow();
-        operateWindow.CreateWindow();
+        operateWindow.CreateDiaryWindow();
     }
 
 }

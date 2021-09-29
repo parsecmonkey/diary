@@ -2,38 +2,31 @@ package diary.src;
 
 // import javax.swing.*;
 import java.awt.*;
+import java.util.Calendar;
 
 public class OperateWindow {
 
+    // 今日の日付を取得
+
     // メイン画面
-    public void CreateWindow() {
+    public void CreateDiaryWindow() {
         // ウィンドウ設定
         String window_title = Setting.window_title; // タイトル
         int window_width = Setting.window_width; // 高さ
         int window_height = Setting.window_height; // 幅
-        DiaryWindow window = new DiaryWindow(window_title, window_width, window_height);
+        DiaryWindow diary_window = new DiaryWindow(window_title, window_width, window_height);
 
-        window.setImageIcon("./diary/img/kis_logo2.png"); // アイコンを設定
-        window.setBackground(Color.RED); // 背景設定 ×
-        window.setTextWindow(); // ウィンドウにテキストを表示
-        window.setButtonWindow(); // ウィンドウにボタンを表示
+        // 初期日付設定
+        diary_window.setNowDate(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)),
+                String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1),
+                String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
 
-        window.setVisible(); // 最後にウィンドウを表示
-    }
+        diary_window.setImageIcon(Setting.icon_path); // アイコンを設定
+        diary_window.setBackground(Color.RED); // 背景設定 ×
+        diary_window.setTextWindow(); // ウィンドウにテキストを表示
+        diary_window.setButtonWindow(); // ウィンドウにボタンを表示
 
-    // 編集画面
-    public void CreateEditWindow() {
-        // ウィンドウ設定
-        String window_title = Setting.window_title; // タイトル
-        int window_width = 400; // 高さ
-        int window_height = 400; // 幅
-        EditWindow window = new EditWindow(window_title, window_width, window_height);
-
-        window.setTextWindow(); // ウィンドウにテキストを表示
-        window.setTextArea("kis", 15); // ウィンドウにテキストエリアを設置
-        window.setBoxColor(); // ウィンドウに枠線カラー指定チェックボックスを設置
-
-        window.setVisible(); // 最後にウィンドウを表示
+        diary_window.setVisible(); // 最後にウィンドウを表示
     }
 
 }
