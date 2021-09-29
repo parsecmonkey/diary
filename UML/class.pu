@@ -7,7 +7,12 @@ class Main {
 class JFrame{
 }
 
-class Window {
+class Window{
+
+}
+
+class DiaryWindow {
+
 }
 
 class EditWindow {
@@ -122,8 +127,9 @@ end note
 ' Json <|-- SettingJson : 継承
 Json <|-- SettingJson
 JFrame <|-- Window
-Window "1" *-- "1" OperateWindow
+Window <|-- DiaryWindow
 Window <|-- EditWindow
+DiaryWindow "1" *-- "1" OperateWindow
 EditWindow "1" *-- "1" OperateWindow
 OperateWindow "1" *-- "1" Main
 Setting "1" *-- "1" SettingJson

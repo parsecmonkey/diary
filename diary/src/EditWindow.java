@@ -6,25 +6,34 @@ import java.awt.*;
 // import java.awt.event.*;
 
 public class EditWindow extends Window {
+    // 現在画面の日付
+    private String nowYear;
+    private String nowMonth;
+    private String nowDay;
+
+    public final void setNowDate(String year, String month, String day) {
+        this.nowYear = year;
+        this.nowMonth = month;
+        this.nowDay = day;
+    }
 
     // ウィンドウの設定
     public EditWindow(String title, int width, int height) {
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE); // 閉じるボタンの処理
-        setTitle(title); // タイトルの設定
-        setSize(width, height);// ウィンドウサイズ
-        setLocationRelativeTo(null);// 画面中央に配置
-        setResizable(false);// リサイズ禁止
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // 閉じるボタンの処理
+        this.setTitle(title); // タイトルの設定
+        this.setSize(width, height);// ウィンドウサイズ
+        this.setLocationRelativeTo(null);// 画面中央に配置
+        this.setResizable(false);// リサイズ禁止
     }
 
     // ウィンドウのテキスト設定
-    @Override
     public void setTextWindow() {
         JPanel panel = new JPanel();
-        JLabel label = new JLabel("2021/06/16");
+        JLabel label = new JLabel(String.format("%s年 %s月 %s日", this.nowYear, this.nowMonth, this.nowDay));
 
         panel.add(label);
 
-        getContentPane().add(panel, BorderLayout.PAGE_START);
+        this.getContentPane().add(panel, BorderLayout.PAGE_START);
     }
 
     // ウィンドウにテキストエリアを設置
@@ -37,7 +46,7 @@ public class EditWindow extends Window {
         JPanel panel = new JPanel();
         panel.add(textarea);
 
-        getContentPane().add(panel, BorderLayout.CENTER);
+        this.getContentPane().add(panel, BorderLayout.CENTER);
     }
 
     // ウィンドウに枠線カラー指定チェックボックスを設置
@@ -51,6 +60,13 @@ public class EditWindow extends Window {
         p.add(check1);
         p.add(check2);
 
-        getContentPane().add(p, BorderLayout.PAGE_END);
+        this.getContentPane().add(p, BorderLayout.PAGE_END);
+    }
+
+    // ウィンドウを閉じる際の処理
+    @Override
+    public void dispose() {
+        Debugger.out(this.getTitle() + " ウィンドウが閉じられました");
+        super.dispose();
     }
 }
