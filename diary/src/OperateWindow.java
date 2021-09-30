@@ -11,10 +11,10 @@ public class OperateWindow {
     // メイン画面
     public void CreateDiaryWindow() {
         // ウィンドウ設定
-        String window_title = Setting.window_title; // タイトル
-        int window_width = Setting.window_width; // 高さ
-        int window_height = Setting.window_height; // 幅
-        DiaryWindow diary_window = new DiaryWindow(window_title, window_width, window_height);
+        final String window_title = Setting.window_title; // タイトル
+        final int window_width = Setting.window_width; // 高さ
+        final int window_height = Setting.window_height; // 幅
+        final DiaryWindow diary_window = new DiaryWindow(window_title, window_width, window_height);
 
         // 初期日付設定
         diary_window.setNowDate(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)),

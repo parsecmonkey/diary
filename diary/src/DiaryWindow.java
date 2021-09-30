@@ -8,11 +8,19 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Calendar;
 
-public class DiaryWindow extends Window {
+public class DiaryWindow extends Window implements ActionListener {
     // 現在画面の日付
     protected String nowYear;
     protected String nowMonth;
     protected String nowDay;
+
+    // 年月遷移ボタン類
+    private final JButton prevMonth = new JButton("翌月");// 翌月ボタン
+    private final JButton backMonth = new JButton("前月");// 前月ボタン
+    private final JButton prevYear = new JButton("翌年");// 翌年ボタン
+    private final JButton backYear = new JButton("前年");// 前年ボタン
+
+    private JLabel YMLabel;// 年月表示ラベル
 
     public final void setNowDate(String year, String month, String day) {
         this.nowYear = year;
@@ -29,23 +37,99 @@ public class DiaryWindow extends Window {
         this.setResizable(false);// リサイズ禁止
     }
 
-    // ウィンドウのテキスト設定
-    public void setTextWindow() {
-        JPanel panel = new JPanel(); // パネルのイン ス タンスの 生 成
-        JLabel label = new JLabel(this.nowYear + "年 " + this.nowMonth + "月"); // ラベルのインスタンスの生成
-
-        // テキスト設定
+    private void updateYMLabel(JPanel panel) {
+        final JLabel label = new JLabel(this.nowYear + "年 " + this.nowMonth + "月"); // ラベルのインスタンスの生成
         label.setFont(new Font("MSGothic", Font.PLAIN, 30));
         label.setForeground(Color.BLUE);
+        panel.add(label);
+    }
 
-        panel.add(label); // ラベルをパネルに配置
+    // ウィンドウのテキスト設定
+    public void setTextWindow() {
+        final JPanel panel = new JPanel(); // パネルのインスタンスの 生 成
+
+        // 前年ボタン
+        // final JButton backYear = new JButton("前年");
+        this.backYear.addActionListener(this);
+        panel.add(this.backYear);
+
+        // 前月ボタン
+        // final JButton backMonth = new JButton("前月");
+        this.backMonth.addActionListener(this);
+        panel.add(this.backMonth);
+
+        // 〇〇年✕✕月
+        this.YMLabel = new JLabel(this.nowYear + "年 " + this.nowMonth + "月"); // ラベルのインスタンスの生成
+        this.YMLabel.setFont(new Font("MSGothic", Font.PLAIN, 30));
+        this.YMLabel.setForeground(Color.BLUE);
+        panel.add(YMLabel);
+
+        // 翌月ボタン
+        // final JButton prevMonth = new JButton("翌月");
+        this.prevMonth.addActionListener(this);
+        panel.add(this.prevMonth);
+
+        // 翌年ボタン
+        // final JButton prevYear = new JButton("前年");
+        this.prevYear.addActionListener(this);
+        panel.add(this.prevYear);
+
         this.add(panel, BorderLayout.NORTH); // パネルをウインドウの表示領域に配置
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.backMonth) {
+            // 前月ボタンの処理
+            final int temp_month = Integer.valueOf(this.nowMonth) - 1;
+            if (1 <= temp_month && temp_month <= 12) {
+                this.nowMonth = String.valueOf(temp_month);
+            } else if (temp_month <= 0) {
+                this.nowMonth = "12";
+                this.nowYear = String.valueOf(Integer.valueOf(this.nowYear) - 1);
+            }
+            this.setButtonWindow(); // その年月の日付ボタンを設定
+            this.YMLabel.setText(this.nowYear + "年 " + this.nowMonth + "月");
+        } else if (e.getSource() == this.prevMonth) {
+            // 翌月ボタンの処理
+            final int temp_month = Integer.valueOf(this.nowMonth) + 1;
+            if (1 <= temp_month && temp_month <= 12) {
+                this.nowMonth = String.valueOf(temp_month);
+            } else if (13 <= temp_month) {
+                this.nowMonth = "1";
+                this.nowYear = String.valueOf(Integer.valueOf(this.nowYear) + 1);
+            }
+            this.setButtonWindow(); // その年月の日付ボタンを設定
+            this.YMLabel.setText(this.nowYear + "年 " + this.nowMonth + "月");
+        } else if (e.getSource() == this.backYear) {
+            // 前年ボタンの処理
+            final int temp_year = Integer.valueOf(this.nowYear) - 1;
+            if (temp_year < 1950) { // 例外チェック
+                // メッセージダイアログの表示
+                JOptionPane.showMessageDialog(null, "ごめんなさい^_^\n1950年よりも前には遡れません。");
+            } else {
+                this.nowYear = String.valueOf(Integer.valueOf(this.nowYear) - 1);
+                this.setButtonWindow(); // その年月の日付ボタンを設定
+                this.YMLabel.setText(this.nowYear + "年 " + this.nowMonth + "月");
+            }
+        } else if (e.getSource() == this.prevYear) {
+            // 翌年ボタンの処理
+            final int temp_year = Integer.valueOf(this.nowYear) + 1;
+            if (2200 < temp_year) {
+                // メッセージダイアログの表示
+                JOptionPane.showMessageDialog(null, "ごめんなさい^_^\n2200年よりも後には進めません。");
+            } else {
+                this.nowYear = String.valueOf(Integer.valueOf(this.nowYear) + 1);
+                this.setButtonWindow(); // その年月の日付ボタンを設定
+                this.YMLabel.setText(this.nowYear + "年 " + this.nowMonth + "月");
+            }
+        }
+
     }
 
     // ウィンドウのボタン設定
     public void setButtonWindow() {
         // JPanel panelAction = new JPanel();
-        JPanel panel = new JPanel();
 
         // ボタンを追加
         // JButton btn1 = new JButton("Push");
@@ -58,21 +142,23 @@ public class DiaryWindow extends Window {
 
         // その月の日数を取得
         // this.nowMonth = "2"; //debug
-        Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
         calendar.set(Integer.parseInt(this.nowYear), Integer.parseInt(this.nowMonth) - 1, 1);
-        int day_in_month = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        final int day_in_month = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-        int grid_row = 7;
-        int grid_col = 5;
-        GridLayout gridDate = new GridLayout(0, grid_row, 20, 20); // 行 列 横 縦
+        final int grid_row = 7;
+        final int grid_col = 5;
+        final GridLayout gridDate = new GridLayout(0, grid_row, 20, 20); // 行 列 横 縦
+
+        final JPanel panel = new JPanel();
         panel.setLayout(gridDate);
         for (int i = 0; i < grid_row * grid_col; i++) {
             if (i < day_in_month) {
-                JButton dateButton = new JButton("" + (i + 1));
+                final JButton dateButton = new JButton("" + (i + 1));
                 dateButton.addActionListener(new CreateEditWindow(this.nowYear, this.nowMonth, String.valueOf(i + 1)));
                 panel.add(dateButton);
             } else { // 最大日付外 -> 枠だけ表示
-                JButton dateButton = new JButton();
+                final JButton dateButton = new JButton();
                 dateButton.setEnabled(false);
                 panel.add(dateButton);
             }
@@ -111,7 +197,7 @@ public class DiaryWindow extends Window {
             Debugger.out("CreateEditWindow");
 
             // ウィンドウ設定
-            String window_title = String.format("%s年%s月%s日の日記", this.nowYear, this.nowMonth, this.nowDay); // タイトル
+            final String window_title = String.format("%s年%s月%s日の日記", this.nowYear, this.nowMonth, this.nowDay); // タイトル
 
             // 同一ウィンドウタイトルで既に開かれているか確認
             if (this.isOpened(window_title)) {
@@ -122,9 +208,9 @@ public class DiaryWindow extends Window {
                 this.addOpenedWindow(window_title);
 
                 // ウィンドウの設定
-                int window_width = 400; // 高さ
-                int window_height = 400; // 幅
-                EditWindow editWindow = new EditWindow(window_title, window_width, window_height);
+                final int window_width = 400; // 高さ
+                final int window_height = 400; // 幅
+                final EditWindow editWindow = new EditWindow(window_title, window_width, window_height);
 
                 // 開いているウィンドウに現在のウィンドウタイトルを追加
                 Setting.open_edit_window_titles.add(window_title);
@@ -145,4 +231,5 @@ public class DiaryWindow extends Window {
 
         }
     }
+
 }

@@ -28,8 +28,8 @@ public class EditWindow extends Window {
 
     // ウィンドウのテキスト設定
     public void setTextWindow() {
-        JPanel panel = new JPanel();
-        JLabel label = new JLabel(String.format("%s年 %s月 %s日", this.nowYear, this.nowMonth, this.nowDay));
+        final JPanel panel = new JPanel();
+        final JLabel label = new JLabel(String.format("%s年 %s月 %s日", this.nowYear, this.nowMonth, this.nowDay));
 
         panel.add(label);
 
@@ -38,12 +38,12 @@ public class EditWindow extends Window {
 
     // ウィンドウにテキストエリアを設置
     public void setTextArea(String firstText, int columns) {
-        JTextArea textarea = new JTextArea(firstText); // テキストエリアの初期値を設定
+        final JTextArea textarea = new JTextArea(firstText); // テキストエリアの初期値を設定
         textarea.setColumns(columns); // テキストエリアの列数を指定
         textarea.setPreferredSize(new Dimension(300, 400)); // サイズを指定
         textarea.setLineWrap(true); // 折り返し指定
 
-        JPanel panel = new JPanel();
+        final JPanel panel = new JPanel();
         panel.add(textarea);
 
         this.getContentPane().add(panel, BorderLayout.CENTER);
@@ -51,12 +51,12 @@ public class EditWindow extends Window {
 
     // ウィンドウに枠線カラー指定チェックボックスを設置
     public void setBoxColor() {
-        JCheckBox check1 = new JCheckBox();
-        JCheckBox check2 = new JCheckBox();
+        final JCheckBox check1 = new JCheckBox();
+        final JCheckBox check2 = new JCheckBox();
         check1.setBorderPainted(true);
         check1.setBorder(new LineBorder(Color.RED, 2, false)); // 枠線の色を指定
 
-        JPanel p = new JPanel();
+        final JPanel p = new JPanel();
         p.add(check1);
         p.add(check2);
 
