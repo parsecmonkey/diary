@@ -31,14 +31,30 @@ public class DiaryWindow extends Window {
 
     // ウィンドウのテキスト設定
     public void setTextWindow() {
-        final JPanel panel = new JPanel(); // パネルのイン ス タンスの 生 成
-        final JLabel label = new JLabel(this.nowYear + "年 " + this.nowMonth + "月"); // ラベルのインスタンスの生成
+        final JPanel panel = new JPanel(); // パネルのインスタンスの 生 成
 
-        // テキスト設定
+        // 前年ボタン
+        final JButton backYear = new JButton("前年");
+        panel.add(backYear);
+
+        // 前月ボタン
+        final JButton backMonth = new JButton("前月");
+        panel.add(backMonth);
+
+        // 〇〇年✕✕月
+        final JLabel label = new JLabel(this.nowYear + "年 " + this.nowMonth + "月"); // ラベルのインスタンスの生成
         label.setFont(new Font("MSGothic", Font.PLAIN, 30));
         label.setForeground(Color.BLUE);
+        panel.add(label);
 
-        panel.add(label); // ラベルをパネルに配置
+        // 翌月ボタン
+        final JButton prevMonth = new JButton("翌月");
+        panel.add(prevMonth);
+
+        // 翌年ボタン
+        final JButton prevYear = new JButton("前年");
+        panel.add(prevYear);
+
         this.add(panel, BorderLayout.NORTH); // パネルをウインドウの表示領域に配置
     }
 
