@@ -31,8 +31,8 @@ public class DiaryWindow extends Window {
 
     // ウィンドウのテキスト設定
     public void setTextWindow() {
-        JPanel panel = new JPanel(); // パネルのイン ス タンスの 生 成
-        JLabel label = new JLabel(this.nowYear + "年 " + this.nowMonth + "月"); // ラベルのインスタンスの生成
+        final JPanel panel = new JPanel(); // パネルのイン ス タンスの 生 成
+        final JLabel label = new JLabel(this.nowYear + "年 " + this.nowMonth + "月"); // ラベルのインスタンスの生成
 
         // テキスト設定
         label.setFont(new Font("MSGothic", Font.PLAIN, 30));
@@ -45,7 +45,6 @@ public class DiaryWindow extends Window {
     // ウィンドウのボタン設定
     public void setButtonWindow() {
         // JPanel panelAction = new JPanel();
-        JPanel panel = new JPanel();
 
         // ボタンを追加
         // JButton btn1 = new JButton("Push");
@@ -58,21 +57,23 @@ public class DiaryWindow extends Window {
 
         // その月の日数を取得
         // this.nowMonth = "2"; //debug
-        Calendar calendar = Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
         calendar.set(Integer.parseInt(this.nowYear), Integer.parseInt(this.nowMonth) - 1, 1);
-        int day_in_month = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        final int day_in_month = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-        int grid_row = 7;
-        int grid_col = 5;
-        GridLayout gridDate = new GridLayout(0, grid_row, 20, 20); // 行 列 横 縦
+        final int grid_row = 7;
+        final int grid_col = 5;
+        final GridLayout gridDate = new GridLayout(0, grid_row, 20, 20); // 行 列 横 縦
+
+        final JPanel panel = new JPanel();
         panel.setLayout(gridDate);
         for (int i = 0; i < grid_row * grid_col; i++) {
             if (i < day_in_month) {
-                JButton dateButton = new JButton("" + (i + 1));
+                final JButton dateButton = new JButton("" + (i + 1));
                 dateButton.addActionListener(new CreateEditWindow(this.nowYear, this.nowMonth, String.valueOf(i + 1)));
                 panel.add(dateButton);
             } else { // 最大日付外 -> 枠だけ表示
-                JButton dateButton = new JButton();
+                final JButton dateButton = new JButton();
                 dateButton.setEnabled(false);
                 panel.add(dateButton);
             }
@@ -111,7 +112,7 @@ public class DiaryWindow extends Window {
             Debugger.out("CreateEditWindow");
 
             // ウィンドウ設定
-            String window_title = String.format("%s年%s月%s日の日記", this.nowYear, this.nowMonth, this.nowDay); // タイトル
+            final String window_title = String.format("%s年%s月%s日の日記", this.nowYear, this.nowMonth, this.nowDay); // タイトル
 
             // 同一ウィンドウタイトルで既に開かれているか確認
             if (this.isOpened(window_title)) {
@@ -122,9 +123,9 @@ public class DiaryWindow extends Window {
                 this.addOpenedWindow(window_title);
 
                 // ウィンドウの設定
-                int window_width = 400; // 高さ
-                int window_height = 400; // 幅
-                EditWindow editWindow = new EditWindow(window_title, window_width, window_height);
+                final int window_width = 400; // 高さ
+                final int window_height = 400; // 幅
+                final EditWindow editWindow = new EditWindow(window_title, window_width, window_height);
 
                 // 開いているウィンドウに現在のウィンドウタイトルを追加
                 Setting.open_edit_window_titles.add(window_title);
