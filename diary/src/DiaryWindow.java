@@ -8,11 +8,19 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Calendar;
 
-public class DiaryWindow extends Window {
+public class DiaryWindow extends Window implements ActionListener {
     // 現在画面の日付
     protected String nowYear;
     protected String nowMonth;
     protected String nowDay;
+
+    // 年月遷移ボタン類
+    private final JButton prevMonth = new JButton("翌月");// 翌月ボタン
+    private final JButton backMonth = new JButton("前月");// 前月ボタン
+    private final JButton prevYear = new JButton("翌年");// 翌年ボタン
+    private final JButton backYear = new JButton("前年");// 前年ボタン
+
+    private JLabel YMLabel;// 年月表示ラベル
 
     public final void setNowDate(String year, String month, String day) {
         this.nowYear = year;
@@ -29,33 +37,94 @@ public class DiaryWindow extends Window {
         this.setResizable(false);// リサイズ禁止
     }
 
+    private void updateYMLabel(JPanel panel) {
+        final JLabel label = new JLabel(this.nowYear + "年 " + this.nowMonth + "月"); // ラベルのインスタンスの生成
+        label.setFont(new Font("MSGothic", Font.PLAIN, 30));
+        label.setForeground(Color.BLUE);
+        panel.add(label);
+    }
+
     // ウィンドウのテキスト設定
     public void setTextWindow() {
         final JPanel panel = new JPanel(); // パネルのインスタンスの 生 成
 
         // 前年ボタン
-        final JButton backYear = new JButton("前年");
-        panel.add(backYear);
+        // final JButton backYear = new JButton("前年");
+        this.backYear.addActionListener(this);
+        panel.add(this.backYear);
 
         // 前月ボタン
-        final JButton backMonth = new JButton("前月");
-        panel.add(backMonth);
+        // final JButton backMonth = new JButton("前月");
+        this.backMonth.addActionListener(this);
+        panel.add(this.backMonth);
 
         // 〇〇年✕✕月
-        final JLabel label = new JLabel(this.nowYear + "年 " + this.nowMonth + "月"); // ラベルのインスタンスの生成
-        label.setFont(new Font("MSGothic", Font.PLAIN, 30));
-        label.setForeground(Color.BLUE);
-        panel.add(label);
+        this.YMLabel = new JLabel(this.nowYear + "年 " + this.nowMonth + "月"); // ラベルのインスタンスの生成
+        this.YMLabel.setFont(new Font("MSGothic", Font.PLAIN, 30));
+        this.YMLabel.setForeground(Color.BLUE);
+        panel.add(YMLabel);
 
         // 翌月ボタン
-        final JButton prevMonth = new JButton("翌月");
-        panel.add(prevMonth);
+        // final JButton prevMonth = new JButton("翌月");
+        this.prevMonth.addActionListener(this);
+        panel.add(this.prevMonth);
 
         // 翌年ボタン
-        final JButton prevYear = new JButton("前年");
-        panel.add(prevYear);
+        // final JButton prevYear = new JButton("前年");
+        this.prevYear.addActionListener(this);
+        panel.add(this.prevYear);
 
         this.add(panel, BorderLayout.NORTH); // パネルをウインドウの表示領域に配置
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.backMonth) {
+            // 前月ボタンの処理
+            final int temp_month = Integer.valueOf(this.nowMonth) - 1;
+            if (1 <= temp_month && temp_month <= 12) {
+                this.nowMonth = String.valueOf(temp_month);
+            } else if (temp_month <= 0) {
+                this.nowMonth = "12";
+                this.nowYear = String.valueOf(Integer.valueOf(this.nowYear) - 1);
+            }
+            this.setButtonWindow(); // その年月の日付ボタンを設定
+            this.YMLabel.setText(this.nowYear + "年 " + this.nowMonth + "月");
+        } else if (e.getSource() == this.prevMonth) {
+            // 翌月ボタンの処理
+            final int temp_month = Integer.valueOf(this.nowMonth) + 1;
+            if (1 <= temp_month && temp_month <= 12) {
+                this.nowMonth = String.valueOf(temp_month);
+            } else if (13 <= temp_month) {
+                this.nowMonth = "1";
+                this.nowYear = String.valueOf(Integer.valueOf(this.nowYear) + 1);
+            }
+            this.setButtonWindow(); // その年月の日付ボタンを設定
+            this.YMLabel.setText(this.nowYear + "年 " + this.nowMonth + "月");
+        } else if (e.getSource() == this.backYear) {
+            // 前年ボタンの処理
+            final int temp_year = Integer.valueOf(this.nowYear) - 1;
+            if (temp_year < 1950) { // 例外チェック
+                // メッセージダイアログの表示
+                JOptionPane.showMessageDialog(null, "ごめんなさい^_^\n1950年よりも前には遡れません。");
+            } else {
+                this.nowYear = String.valueOf(Integer.valueOf(this.nowYear) - 1);
+                this.setButtonWindow(); // その年月の日付ボタンを設定
+                this.YMLabel.setText(this.nowYear + "年 " + this.nowMonth + "月");
+            }
+        } else if (e.getSource() == this.prevYear) {
+            // 翌年ボタンの処理
+            final int temp_year = Integer.valueOf(this.nowYear) + 1;
+            if (2200 < temp_year) {
+                // メッセージダイアログの表示
+                JOptionPane.showMessageDialog(null, "ごめんなさい^_^\n2200年よりも後には進めません。");
+            } else {
+                this.nowYear = String.valueOf(Integer.valueOf(this.nowYear) + 1);
+                this.setButtonWindow(); // その年月の日付ボタンを設定
+                this.YMLabel.setText(this.nowYear + "年 " + this.nowMonth + "月");
+            }
+        }
+
     }
 
     // ウィンドウのボタン設定
@@ -162,4 +231,5 @@ public class DiaryWindow extends Window {
 
         }
     }
+
 }
