@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 // import java.awt.event.*;
+import java.util.List;
 
 public class EditWindow extends Window {
     // 現在画面の日付
@@ -67,6 +68,7 @@ public class EditWindow extends Window {
     @Override
     public void dispose() {
         Debugger.out(this.getTitle() + " ウィンドウが閉じられました");
+        Setting.open_edit_window_titles.remove(this.getTitle());
         super.dispose();
     }
 }

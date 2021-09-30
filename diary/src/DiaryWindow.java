@@ -37,13 +37,6 @@ public class DiaryWindow extends Window implements ActionListener {
         this.setResizable(false);// リサイズ禁止
     }
 
-    private void updateYMLabel(JPanel panel) {
-        final JLabel label = new JLabel(this.nowYear + "年 " + this.nowMonth + "月"); // ラベルのインスタンスの生成
-        label.setFont(new Font("MSGothic", Font.PLAIN, 30));
-        label.setForeground(Color.BLUE);
-        panel.add(label);
-    }
-
     // ウィンドウのテキスト設定
     public void setTextWindow() {
         final JPanel panel = new JPanel(); // パネルのインスタンスの 生 成
@@ -155,6 +148,7 @@ public class DiaryWindow extends Window implements ActionListener {
         for (int i = 0; i < grid_row * grid_col; i++) {
             if (i < day_in_month) {
                 final JButton dateButton = new JButton("" + (i + 1));
+                // dateButton.setBackground(Color.LIGHT_GRAY);// ボタン背景色
                 dateButton.addActionListener(new CreateEditWindow(this.nowYear, this.nowMonth, String.valueOf(i + 1)));
                 panel.add(dateButton);
             } else { // 最大日付外 -> 枠だけ表示
@@ -165,12 +159,12 @@ public class DiaryWindow extends Window implements ActionListener {
         }
 
         // ボタンを表示
-        this.getContentPane().add(panel, BorderLayout.CENTER);
+        this.add(panel, BorderLayout.CENTER);
         // this.getContentPane().add(panelAction, BorderLayout.SOUTH);
     }
 
     // 日付ボタンクリック時のアクション
-    static class CreateEditWindow implements ActionListener {
+    public class CreateEditWindow implements ActionListener {
 
         private String nowYear;
         private String nowMonth;
@@ -194,10 +188,10 @@ public class DiaryWindow extends Window implements ActionListener {
 
         // 新しい画面の作成
         public void actionPerformed(ActionEvent e) {
-            Debugger.out("CreateEditWindow");
 
             // ウィンドウ設定
             final String window_title = String.format("%s年%s月%s日の日記", this.nowYear, this.nowMonth, this.nowDay); // タイトル
+            Debugger.out("CreateEditWindow of " + window_title);
 
             // 同一ウィンドウタイトルで既に開かれているか確認
             if (this.isOpened(window_title)) {
@@ -205,15 +199,14 @@ public class DiaryWindow extends Window implements ActionListener {
                 JOptionPane.showMessageDialog(null, "同じウィンドウは開けません！\n " + window_title + "の日記は既に開いています。");
             } else {
                 // 開いていない場合
+
+                // 開いているウィンドウに現在のウィンドウタイトルを追加
                 this.addOpenedWindow(window_title);
 
                 // ウィンドウの設定
                 final int window_width = 400; // 高さ
                 final int window_height = 400; // 幅
                 final EditWindow editWindow = new EditWindow(window_title, window_width, window_height);
-
-                // 開いているウィンドウに現在のウィンドウタイトルを追加
-                Setting.open_edit_window_titles.add(window_title);
 
                 // 日付
                 editWindow.setNowDate(this.nowYear, this.nowMonth, this.nowDay);
