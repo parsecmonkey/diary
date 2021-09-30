@@ -4,7 +4,6 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 // import java.awt.event.*;
-import java.util.List;
 
 public class EditWindow extends Window {
     // 現在画面の日付

@@ -22,6 +22,9 @@ public class DiaryWindow extends Window implements ActionListener {
 
     private JLabel YMLabel;// 年月表示ラベル
 
+    // day panel
+    private JPanel day_panel = new JPanel();
+
     public final void setNowDate(String year, String month, String day) {
         this.nowYear = year;
         this.nowMonth = month;
@@ -143,28 +146,30 @@ public class DiaryWindow extends Window implements ActionListener {
         final int grid_col = 5;
         final GridLayout gridDate = new GridLayout(0, grid_row, 20, 20); // 行 列 横 縦
 
-        final JPanel panel = new JPanel();
-        panel.setLayout(gridDate);
+        // final JPanel day_panel = new JPanel();
+        day_panel.removeAll(); // 一旦パネルの要素を全部削除
+        day_panel.setLayout(gridDate);
         for (int i = 0; i < grid_row * grid_col; i++) {
             if (i < day_in_month) {
                 final JButton dateButton = new JButton("" + (i + 1));
                 // dateButton.setBackground(Color.LIGHT_GRAY);// ボタン背景色
                 dateButton.addActionListener(new CreateEditWindow(this.nowYear, this.nowMonth, String.valueOf(i + 1)));
-                panel.add(dateButton);
+                day_panel.add(dateButton);
             } else { // 最大日付外 -> 枠だけ表示
                 final JButton dateButton = new JButton();
                 dateButton.setEnabled(false);
-                panel.add(dateButton);
+                day_panel.add(dateButton);
             }
         }
+        Debugger.out("hgoe; " + this.nowYear + "年" + this.nowMonth + "月" + this.nowDay + "日");
 
         // ボタンを表示
-        this.add(panel, BorderLayout.CENTER);
+        this.getContentPane().add(day_panel, BorderLayout.CENTER);
         // this.getContentPane().add(panelAction, BorderLayout.SOUTH);
     }
 
     // 日付ボタンクリック時のアクション
-    public class CreateEditWindow implements ActionListener {
+    static class CreateEditWindow implements ActionListener {
 
         private String nowYear;
         private String nowMonth;
@@ -210,6 +215,7 @@ public class DiaryWindow extends Window implements ActionListener {
 
                 // 日付
                 editWindow.setNowDate(this.nowYear, this.nowMonth, this.nowDay);
+                Debugger.out(this.nowYear + "年" + this.nowMonth + "月" + this.nowDay + "日");
 
                 // アイコン
                 editWindow.setImageIcon(Setting.icon_path);
