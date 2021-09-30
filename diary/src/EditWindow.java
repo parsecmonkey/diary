@@ -67,6 +67,7 @@ public class EditWindow extends Window {
     @Override
     public void dispose() {
         Debugger.out(this.getTitle() + " ウィンドウが閉じられました");
+        Setting.open_edit_window_titles.remove(this.getTitle());
         super.dispose();
     }
 }

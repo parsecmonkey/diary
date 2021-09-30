@@ -22,6 +22,9 @@ public class DiaryWindow extends Window implements ActionListener {
 
     private JLabel YMLabel;// 年月表示ラベル
 
+    // day panel
+    private JPanel day_panel = new JPanel();
+
     public final void setNowDate(String year, String month, String day) {
         this.nowYear = year;
         this.nowMonth = month;
@@ -35,13 +38,6 @@ public class DiaryWindow extends Window implements ActionListener {
         this.setSize(width, height);// ウィンドウサイズ
         this.setLocationRelativeTo(null);// 画面中央に配置
         this.setResizable(false);// リサイズ禁止
-    }
-
-    private void updateYMLabel(JPanel panel) {
-        final JLabel label = new JLabel(this.nowYear + "年 " + this.nowMonth + "月"); // ラベルのインスタンスの生成
-        label.setFont(new Font("MSGothic", Font.PLAIN, 30));
-        label.setForeground(Color.BLUE);
-        panel.add(label);
     }
 
     // ウィンドウのテキスト設定
@@ -150,22 +146,25 @@ public class DiaryWindow extends Window implements ActionListener {
         final int grid_col = 5;
         final GridLayout gridDate = new GridLayout(0, grid_row, 20, 20); // 行 列 横 縦
 
-        final JPanel panel = new JPanel();
-        panel.setLayout(gridDate);
+        // final JPanel day_panel = new JPanel();
+        day_panel.removeAll(); // 一旦パネルの要素を全部削除
+        day_panel.setLayout(gridDate);
         for (int i = 0; i < grid_row * grid_col; i++) {
             if (i < day_in_month) {
                 final JButton dateButton = new JButton("" + (i + 1));
+                // dateButton.setBackground(Color.LIGHT_GRAY);// ボタン背景色
                 dateButton.addActionListener(new CreateEditWindow(this.nowYear, this.nowMonth, String.valueOf(i + 1)));
-                panel.add(dateButton);
+                day_panel.add(dateButton);
             } else { // 最大日付外 -> 枠だけ表示
                 final JButton dateButton = new JButton();
                 dateButton.setEnabled(false);
-                panel.add(dateButton);
+                day_panel.add(dateButton);
             }
         }
+        Debugger.out("hgoe; " + this.nowYear + "年" + this.nowMonth + "月" + this.nowDay + "日");
 
         // ボタンを表示
-        this.getContentPane().add(panel, BorderLayout.CENTER);
+        this.getContentPane().add(day_panel, BorderLayout.CENTER);
         // this.getContentPane().add(panelAction, BorderLayout.SOUTH);
     }
 
@@ -194,10 +193,10 @@ public class DiaryWindow extends Window implements ActionListener {
 
         // 新しい画面の作成
         public void actionPerformed(ActionEvent e) {
-            Debugger.out("CreateEditWindow");
 
             // ウィンドウ設定
             final String window_title = String.format("%s年%s月%s日の日記", this.nowYear, this.nowMonth, this.nowDay); // タイトル
+            Debugger.out("CreateEditWindow of " + window_title);
 
             // 同一ウィンドウタイトルで既に開かれているか確認
             if (this.isOpened(window_title)) {
@@ -205,6 +204,8 @@ public class DiaryWindow extends Window implements ActionListener {
                 JOptionPane.showMessageDialog(null, "同じウィンドウは開けません！\n " + window_title + "の日記は既に開いています。");
             } else {
                 // 開いていない場合
+
+                // 開いているウィンドウに現在のウィンドウタイトルを追加
                 this.addOpenedWindow(window_title);
 
                 // ウィンドウの設定
@@ -212,11 +213,9 @@ public class DiaryWindow extends Window implements ActionListener {
                 final int window_height = 400; // 幅
                 final EditWindow editWindow = new EditWindow(window_title, window_width, window_height);
 
-                // 開いているウィンドウに現在のウィンドウタイトルを追加
-                Setting.open_edit_window_titles.add(window_title);
-
                 // 日付
                 editWindow.setNowDate(this.nowYear, this.nowMonth, this.nowDay);
+                Debugger.out(this.nowYear + "年" + this.nowMonth + "月" + this.nowDay + "日");
 
                 // アイコン
                 editWindow.setImageIcon(Setting.icon_path);
