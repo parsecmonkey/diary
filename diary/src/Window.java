@@ -1,5 +1,3 @@
-package diary.src;
-
 import javax.swing.*;
 import java.awt.*;
 

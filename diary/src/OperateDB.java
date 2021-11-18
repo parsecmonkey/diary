@@ -1,5 +1,3 @@
-package diary.src;
-
 public class OperateDB {
     private DiarySQLite sqlite;
     private String dbPath;

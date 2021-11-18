@@ -1,5 +1,3 @@
-package diary.src;
-
 import java.sql.*;
 
 public class DiarySQLite {

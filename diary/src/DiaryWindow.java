@@ -1,7 +1,6 @@
 /*
  * ウィンドウの設定
 */
-package diary.src;
 
 import javax.swing.*;
 import java.awt.*;

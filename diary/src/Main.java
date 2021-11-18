@@ -1,7 +1,5 @@
 // メイン実行ファイル
 
-package diary.src;
-
 class Main {
     public static void main(String args[]) {
         Debugger.out("Start program.", 0);

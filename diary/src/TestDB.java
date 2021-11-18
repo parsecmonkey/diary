@@ -1,8 +1,6 @@
 // メイン実行ファイル
 // データベーステスト用
 
-package diary.src;
-
 class TestDB {
     public static void main(String args[]) {
         Debugger.out("Start Test.", 0);

@@ -5,8 +5,6 @@ label_levelでラベルの表示を定義できます．
 
 */
 
-package diary.src;
-
 public final class Debugger {
     // デバッグ
 

@@ -1,4 +1,3 @@
-package diary.src;
 
 import com.google.gson.Gson;
 
@@ -9,8 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.CodeSource;
 import java.security.ProtectionDomain;
-
-import diary.src.Json;
 
 public class Json {
     protected Gson gson;
